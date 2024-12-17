@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import data.common.config.*;
 /**
  * A class to manage the MySQL connection (general methods and configuration).
- * @author Aurora Ramirez
+ * @author Auora Ramirez
  * @author Jose Raul Romero
  * */
 

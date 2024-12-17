@@ -9,7 +9,7 @@ public class SqlProperties {
     // Método que carga el archivo .properties especificado y obtiene el valor de la clave
     public static String getClave(String archivo, String clave) {
         Properties propiedades = new Properties();
-        try (InputStream input = SqlProperties.class.getClassLoader().getResourceAsStream("es/uco/data/common/sql/" + archivo)) {
+        try (InputStream input = SqlProperties.class.getClassLoader().getResourceAsStream("data/common/sql/" + archivo)) {
             if (input == null) {
                 System.err.println("No se pudo encontrar el archivo " + archivo);
                 return null;

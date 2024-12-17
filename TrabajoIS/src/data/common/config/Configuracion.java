@@ -13,7 +13,7 @@ public class Configuracion {
     private static Properties propiedades = new Properties();
 
     static {
-        try (InputStream input = Configuracion.class.getClassLoader().getResourceAsStream("es/uco/data/common/config/config.properties")) {
+        try (InputStream input = Configuracion.class.getClassLoader().getResourceAsStream("data/common/config/config.properties")) {
             if (input == null) {
                 throw new FileNotFoundException("No se pudo encontrar el archivo config.properties");
             }

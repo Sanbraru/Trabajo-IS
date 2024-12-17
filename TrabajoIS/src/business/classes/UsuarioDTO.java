@@ -1,12 +1,25 @@
 package business.classes;
 
-public class UsuarioDTO 
-{
+public class UsuarioDTO {
     private String correo;
     private String contrasena;
     private String nombre;
     private String apellidos;
     private String dni;
+
+    // Constructor vacío
+    public UsuarioDTO() {
+        // El constructor vacío no hace nada por defecto.
+    }
+
+    // Constructor parametrizado
+    public UsuarioDTO(String correo, String contrasena, String nombre, String apellidos, String dni) {
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+    }
 
     // Getters y Setters
     public String getCorreo() {
@@ -48,5 +61,4 @@ public class UsuarioDTO
     public void setDni(String dni) {
         this.dni = dni;
     }
-
 }

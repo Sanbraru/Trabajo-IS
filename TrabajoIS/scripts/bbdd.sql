@@ -131,5 +131,9 @@ CREATE TABLE `Usuario` (
 -- 
 -- Volcar la base de datos para la tabla `Usuario`
 -- 
-
+INSERT INTO `Usuario` VALUES ('juan.perez@example.com', 'contraseña123', 'Juan', 'Pérez', '12345678A');
+INSERT INTO `Usuario` VALUES ('maria.gomez@example.com', 'contraseña456', 'María', 'Gómez', '23456789B');
+INSERT INTO `Usuario` VALUES ('pedro.martinez@example.com', 'contraseña789', 'Pedro', 'Martínez', '34567890C');
+INSERT INTO `Usuario` VALUES ('lucia.sanchez@example.com', 'contraseña101', 'Lucía', 'Sánchez', '45678901D');
+INSERT INTO `Usuario` VALUES ('antonio.rodriguez@example.com', 'contraseña102', 'Antonio', 'Rodríguez', '56789012E');
 
