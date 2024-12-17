@@ -8,7 +8,7 @@ public class MainProfesorado
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\n=== MENÚ PRINCIPAL ===");
+            System.out.println("\n=== MENU PROFESORADO ===");
             System.out.println("1. Ver Perfil");
             System.out.println("2. Opciones");
             System.out.println("3. Cerrar Sesión");

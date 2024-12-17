@@ -6,7 +6,17 @@ public class GestorUsuarios
 {
     public static String iniciarSesion(String usuario, String contrasena) 
     {   
-    	return UsuarioDAO.loginUsuario(usuario, contrasena);
+    	int idUsuario = 0;
+    	idUsuario = UsuarioDAO.loginUsuario(usuario, contrasena);
+    
+    	if(idUsuario != 0)
+    	{
+    		return UsuarioDAO.searchID(idUsuario);
+    	}
+    	else
+    	{
+    		return null;
+    	}
     }
 }
 

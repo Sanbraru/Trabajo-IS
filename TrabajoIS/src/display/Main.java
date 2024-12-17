@@ -15,8 +15,7 @@ public class Main
             System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Iniciar Sesión");
             System.out.println("2. Crear Cuenta");
-            System.out.println("3. Eliminar Cuenta");
-            System.out.println("4. Salir");
+            System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             
             int opcion = scanner.nextInt();
@@ -45,6 +44,8 @@ public class Main
                         }
 
                     } while (rol == null);
+                	
+                	System.out.println("Ha iniciado sesión correctamente.");
 
                     // Redirigir según el rol obtenido
                     switch (rol) {
@@ -67,15 +68,15 @@ public class Main
                     break;
                     
                 case 2:
-                    //GestorUsuario.crearCuenta(); //NO
+                   
+                   
                     break;
+            
                 case 3:
-                    //GestorUsuario.eliminarCuenta(); //NO
-                    break;
-                case 4:
                     salir = true;
                     System.out.println("Saliendo del programa...");
                     break;
+                   
                 default:
                     System.out.println("Opción inválida. Intentelo de nuevo.");
             }

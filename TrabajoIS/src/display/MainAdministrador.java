@@ -8,7 +8,7 @@ public class MainAdministrador
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("\n=== MENÚ PRINCIPAL ===");
+            System.out.println("\n=== MENU ADMINISTRADOR ===");
             System.out.println("1. Ver Perfil");
             System.out.println("2. Añadir Plan de Convalidación");
             System.out.println("3. Obtener historial de los Planes de Convalidación");
