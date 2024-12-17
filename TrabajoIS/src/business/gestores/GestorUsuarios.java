@@ -1,6 +1,8 @@
 package business.gestores;
 
+import business.classes.UsuarioDTO;
 import data.dao.UsuarioDAO;
+
 
 public class GestorUsuarios
 {
@@ -17,6 +19,21 @@ public class GestorUsuarios
     	{
     		return null;
     	}
+    }
+    
+    public static boolean crearUsuario(UsuarioDTO nuevoUsuario)
+    {
+    	return UsuarioDAO.addUser(nuevoUsuario);
+    }
+    
+    public static boolean crearAlumno(UsuarioDTO nuevoUsuario)
+    {
+    	return UsuarioDAO.addStudent(nuevoUsuario);
+    }
+    
+    public static boolean crearProfesor(UsuarioDTO nuevoUsuario)
+    {
+    	return UsuarioDAO.addTeacher(nuevoUsuario);
     }
 }
 

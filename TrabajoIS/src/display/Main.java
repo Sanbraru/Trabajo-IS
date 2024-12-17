@@ -1,6 +1,8 @@
 package display;
 
 import java.util.Scanner;
+
+import business.classes.*;
 import business.gestores.*;
 
 public class Main 
@@ -68,8 +70,115 @@ public class Main
                     break;
                     
                 case 2:
-                   
-                   
+                	
+                    System.out.print("Ingrese su correo: ");
+                    String correo = scanner.nextLine();
+                    
+                    System.out.print("Ingrese su contraseña: ");
+                    String contrasena = scanner.nextLine();
+                    
+                    System.out.print("Ingrese su nombre: ");
+                    String nombre = scanner.nextLine();
+                    
+                    System.out.print("Ingrese sus apellidos: ");
+                    String apellidos  = scanner.nextLine();
+                    
+                    System.out.print("Ingrese sus dni: ");
+                    String dni  = scanner.nextLine();
+                    
+                    UsuarioDTO nuevoUsuario = new UsuarioDTO(correo, contrasena, nombre, apellidos, dni);
+                    
+                    System.out.print("¿Usted es un Alumno o un Profesor? (a/p).");
+                    
+                    String respuesta = scanner.nextLine();
+                    
+                    GestorUsuarios.crearUsuario(nuevoUsuario);
+                    
+                    if (respuesta.equalsIgnoreCase("a"))
+                    {
+                    	System.out.println("Como 'Alumno' tendrás que añadir más datos.");
+
+                    	System.out.print("Ingrese su Número de Teléfono: ");
+                    	int telefono = scanner.nextInt();
+                    	scanner.nextLine();  // Limpiar buffer
+
+                    	System.out.print("Ingrese su Año Académico: ");
+                    	int anoAcademico = scanner.nextInt();
+                    	scanner.nextLine();  // Limpiar buffer
+
+                    	System.out.print("Ingrese su Centro de Origen: ");
+                    	String centroorigen = scanner.nextLine();
+                    	
+                    	int solicitaayuda = 0;
+                    	int inscrito = 0;
+                    	int realizado = 0;
+               
+                    	// Crear el objeto AlumnadoDTO con los datos recogidos
+                    	AlumnadoDTO nuevoAlumno = new AlumnadoDTO(
+                    	    correo, 
+                    	    contrasena, 
+                    	    nombre, 
+                    	    apellidos, 
+                    	    dni, 
+                    	    telefono, 
+                    	    anoAcademico, 
+                    	    centroorigen, 
+                    	    solicitaayuda == 0,   // Convertir 1/0 a booleano
+                    	    inscrito == 0,  // Puede pedir otro dato si se requiere para 'inscrito'
+                    	    realizado == 0 // Convertir 1/0 a booleano
+                    	);
+
+                        if(GestorAlumnado.crearAlumno(nuevoAlumno) == true)
+                        {
+                        	System.out.println("Su cuenta ha sido creada satisfactoriamente.");
+                        }
+                    	else
+                    	{
+                    		System.out.println("Su cuenta no ha sido creada satisfactoriamente.");
+                    	}
+                 
+                    }
+                    else if(respuesta.equalsIgnoreCase("p"))
+                    {	
+                    	System.out.println("Como 'Profesor' tendrás que añadir más datos.");
+
+                    	System.out.print("Ingrese su Número de Teléfono: ");
+                    	int telefono = scanner.nextInt();
+                    	scanner.nextLine();  // Limpiar buffer
+
+                    	System.out.print("Ingrese su Centro de Origen: ");
+                    	String centroorigen = scanner.nextLine();
+                    	
+                    	int solicitaayuda = 0;
+                    	int realizado = 0;
+               
+                    
+                    	ProfesoradoDTO nuevoProfesor = new ProfesoradoDTO(
+                    	    correo, 
+                    	    contrasena, 
+                    	    nombre, 
+                    	    apellidos, 
+                    	    dni, 
+                    	    telefono, 
+                    	    centroorigen, 
+                    	    solicitaayuda == 0,   // Convertir 1/0 a booleano
+                    	    realizado == 0 // Convertir 1/0 a booleano
+                    	);
+                    	
+                    	if(GestorProfesorado.crearProfesor(nuevoProfesor) == true)
+                        {
+                        	System.out.println("Su cuenta ha sido creada satisfactoriamente.");
+                        }
+                    	else
+                    	{
+                    		System.out.println("Su cuenta no ha sido creada satisfactoriamente.");
+                    	}
+                    }
+                    else
+                    {
+                    	System.out.println("Error al identificarse. No se ha podido crear su cuenta.");
+                    }
+                    
                     break;
             
                 case 3:
