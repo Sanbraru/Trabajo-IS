@@ -10,8 +10,11 @@ public class MainAdministrador
         while (!salir) {
             System.out.println("\n=== MENÚ PRINCIPAL ===");
             System.out.println("1. Ver Perfil");
-            System.out.println("2. Opciones");
-            System.out.println("3. Cerrar Sesión");
+            System.out.println("2. Añadir Plan de Convalidación");
+            System.out.println("3. Obtener historial de los Planes de Convalidación");
+            System.out.println("4. Cerrar Plan de Convalidación");
+            
+
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();

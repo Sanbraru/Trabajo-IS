@@ -10,6 +10,25 @@ public class AlumnadoDTO extends UsuarioDTO
     private boolean inscrito;
     private boolean realizado;
 
+    //Constructores
+    // Constructor vacío
+    public AlumnadoDTO() {}
+
+    // Constructor parametrizado
+    public AlumnadoDTO(String correo, String contrasena, String nombre, String apellidos, String dni,
+                    int telefono, int anioAcademico, String centroOrigen,
+                    boolean solicitaAyuda, boolean inscrito, boolean realizado) 
+    {
+
+        super(correo, contrasena, nombre, apellidos, dni); // Llamada al constructor de la clase padre
+        this.telefono = telefono;
+        this.anioAcademico = anioAcademico;
+        this.centroOrigen = centroOrigen;
+        this.solicitaAyuda = solicitaAyuda;
+        this.inscrito = inscrito;
+        this.realizado = realizado;
+    }
+
     // Getters y Setters
     public int getTelefono() {
         return telefono;

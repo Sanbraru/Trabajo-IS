@@ -8,6 +8,23 @@ public class ProfesoradoDTO extends UsuarioDTO
     private boolean solicitaAyuda;
     private boolean realizado;
 
+    //Constructores
+
+     // Constructor vacío
+     public ProfesoradoDTO() {}
+
+    // Constructor parametrizado
+    public ProfesoradoDTO(String correo, String contrasena, String nombre, String apellidos, String dni,
+                       int telefono, String centroOrigen, boolean solicitaAyuda, boolean realizado)
+                        
+    {
+        super(correo, contrasena, nombre, apellidos, dni); // Llamada al constructor de la clase padre
+        this.telefono = telefono;
+        this.centroOrigen = centroOrigen;
+        this.solicitaAyuda = solicitaAyuda;
+        this.realizado = realizado;
+    }
+
     // Getters y Setters
     public int getTelefono() {
         return telefono;

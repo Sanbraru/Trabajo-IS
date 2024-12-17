@@ -14,6 +14,24 @@ public class PlanesDeConvalidacionDTO
     private int anioAcademico;
     private List<String> listaInscritos;//A revisar
 
+    // Constructor vacío
+    public PlanesDeConvalidacionDTO() {}
+
+    // Constructor parametrizado
+    public PlanesDeConvalidacionDTO(String id, boolean tipoUsuario, String tiempoPlan, String centroDestino,
+                                List<String> asignaturasOrigen, List<String> asignaturasDestino,
+                                boolean vigente, int anioAcademico, List<String> listaInscritos) {
+        this.id = id;
+        this.tipoUsuario = tipoUsuario;
+        this.tiempoPlan = tiempoPlan;
+        this.centroDestino = centroDestino;
+        this.asignaturasOrigen = asignaturasOrigen;
+        this.asignaturasDestino = asignaturasDestino;
+        this.vigente = vigente;
+        this.anioAcademico = anioAcademico;
+        this.listaInscritos = listaInscritos;
+    }
+
     // Getters y Setters
     public String getId() {
         return id;

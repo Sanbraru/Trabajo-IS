@@ -8,6 +8,18 @@ public class SistemaDTO
     private List<AlumnadoDTO> listaAlumnado; //A revisar
     private List<ProfesoradoDTO> listaProfesores; //A revisar
 
+    //Constructor
+
+    // Constructor vacío
+    public SistemaDTO() {}
+
+    // Constructor parametrizado
+    public SistemaDTO(List<PlanesDeConvalidacionDTO> listaPlanes, List<AlumnadoDTO> listaAlumnado, List<ProfesoradoDTO> listaProfesores) {
+        this.listaPlanes = listaPlanes;
+        this.listaAlumnado = listaAlumnado;
+        this.listaProfesores = listaProfesores;
+    }
+
     // Getters y Setters
     public List<PlanesDeConvalidacionDTO> getListaPlanes() {
         return listaPlanes;
