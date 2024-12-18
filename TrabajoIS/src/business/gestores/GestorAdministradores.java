@@ -19,12 +19,12 @@ public class GestorAdministradores
     public static boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
     {
        
-        if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
+        if(PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
         {
-            return false;
+            return true;
         }
                 
-        return true;
+        return false;
     }
     
     public static boolean insertarAsignatura(AsignaturaDTO n)

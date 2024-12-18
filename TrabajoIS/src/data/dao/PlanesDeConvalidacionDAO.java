@@ -42,7 +42,10 @@ public class PlanesDeConvalidacionDAO {
 
             //Con esto compruebas que se ha insertado el nuevo material
             int rowsAffected = pstmt.executeUpdate();
-            insertado = rowsAffected > 0 && rowsAffected <= 1;
+            if(rowsAffected > 0)
+            {
+                insertado = true;
+            }
 
             pstmt.close(); // Cierra el PreparedStatement
             dbConnection.closeConnection(); // Cierra la conexión

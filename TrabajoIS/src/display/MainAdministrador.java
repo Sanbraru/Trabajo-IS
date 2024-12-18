@@ -80,7 +80,7 @@ public class MainAdministrador
                         }
 
 
-                        System.out.println("Asingaturas de Origen y Destino: ");
+                        System.out.println("Asignaturas de Origen y Destino: ");
                         System.out.println("Estas son las asignaturas existentes: ");
 
                         ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
