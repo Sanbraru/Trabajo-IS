@@ -9,12 +9,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList; 
 
-
-public class PlanesDeConvalidacionDAO {
-
-    public static boolean insertarPlanDAO(PlanesDeConvalidacionDTO n)
+public class AsignaturaDAO 
+{
+    
+    public static boolean insertAsignatura(AsignaturaDTO n)
     {
-
         Boolean insertado = false;
 
         try 
@@ -22,24 +21,16 @@ public class PlanesDeConvalidacionDAO {
 
             DBConnection dbConnection = new DBConnection();
             Connection connection = dbConnection.getConnection();
-            String cola = SqlProperties.getClave("sqlMaterial.properties", "insertPlan");
+            String cola = SqlProperties.getClave("sqlAsignatura.properties", "insertAsignatura");
             
             PreparedStatement pstmt = connection.prepareStatement(cola);
 
 
-            pstmt.setInt(1, n.getIdMaterial());
+            pstmt.setInt(1, n.getID());
 
             // Set del tipo
 
-            String tipostr = n.getTipo().toString();
-            pstmt.setString(2, tipostr);
-
-            // Set de el uso exterior
-            pstmt.setBoolean(3, n.isUsoExterior());
-
-            // Set del estado
-            String estadostr = n.getEstado().toString();
-            pstmt.setString(4, estadostr);
+            pstmt.setString(2, n.getNombre());
 
             //Con esto compruebas que se ha insertado el nuevo material
             int rowsAffected = pstmt.executeUpdate();
@@ -57,7 +48,6 @@ public class PlanesDeConvalidacionDAO {
 
 
         return insertado;
-
     }
 
 }

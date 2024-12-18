@@ -1,8 +1,10 @@
 package business.gestores;
 import java.util.ArrayList;
 
-import business.classes.UsuarioDTO;
+import business.classes.*;
 import data.dao.PlanesDeConvalidacionDAO;
+import data.dao.AsignaturaDAO;
+
 
 
 public class GestorAdministradores
@@ -14,5 +16,24 @@ public class GestorAdministradores
 
         return listaApuntados;
     }
+
+    public boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
+    {
+
+        if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
+        {
+            return false;
+        }
+        
+        return true;
+    }
     
+    public boolean insertarAsignatura(AsignaturaDTO n)
+    {
+        if(!AsignaturaDAO.insertAsignatura(n))
+        {
+            return false;
+        }
+        return true;
+    }
 }

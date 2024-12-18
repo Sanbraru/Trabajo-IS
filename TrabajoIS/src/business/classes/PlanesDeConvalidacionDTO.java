@@ -1,26 +1,27 @@
 package business.classes;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanesDeConvalidacionDTO 
 {
 
-    private String id;
+    private int id;
     private boolean tipoUsuario;
     private int tiempoPlan;
     private String centroDestino;
-    private List<String> asignaturasOrigen; //A revisar
-    private List<String> asignaturasDestino;//A revisar
+    private List<AsignaturaDTO> asignaturasOrigen; //A revisar
+    private List<AsignaturaDTO> asignaturasDestino;//A revisar
     private boolean vigente;
     private int anioAcademico;
-    private List<String> listaInscritos;//A revisar
+    private List<UsuarioDTO> listaInscritos;//A revisar
 
     // Constructor vacío
     public PlanesDeConvalidacionDTO() {}
 
     // Constructor parametrizado
-    public PlanesDeConvalidacionDTO(String id, boolean tipoUsuario, int tiempoPlan, String centroDestino,
-                                List<String> asignaturasOrigen, List<String> asignaturasDestino,
-                                boolean vigente, int anioAcademico, List<String> listaInscritos) {
+    public PlanesDeConvalidacionDTO(int id, boolean tipoUsuario, int tiempoPlan, String centroDestino,
+                                List<AsignaturaDTO> asignaturasOrigen, List<AsignaturaDTO> asignaturasDestino,
+                                boolean vigente, int anioAcademico) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
         this.tiempoPlan = tiempoPlan;
@@ -29,15 +30,15 @@ public class PlanesDeConvalidacionDTO
         this.asignaturasDestino = asignaturasDestino;
         this.vigente = vigente;
         this.anioAcademico = anioAcademico;
-        this.listaInscritos = listaInscritos;
+        this.listaInscritos = new ArrayList<>();
     }
 
     // Getters y Setters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -65,19 +66,19 @@ public class PlanesDeConvalidacionDTO
         this.centroDestino = centroDestino;
     }
 
-    public List<String> getAsignaturasOrigen() {
+    public List<AsignaturaDTO> getAsignaturasOrigen() {
         return asignaturasOrigen;
     }
 
-    public void setAsignaturasOrigen(List<String> asignaturasOrigen) {
+    public void setAsignaturasOrigen(List<AsignaturaDTO> asignaturasOrigen) {
         this.asignaturasOrigen = asignaturasOrigen;
     }
 
-    public List<String> getAsignaturasDestino() {
+    public List<AsignaturaDTO> getAsignaturasDestino() {
         return asignaturasDestino;
     }
 
-    public void setAsignaturasDestino(List<String> asignaturasDestino) {
+    public void setAsignaturasDestino(List<AsignaturaDTO> asignaturasDestino) {
         this.asignaturasDestino = asignaturasDestino;
     }
 
@@ -97,11 +98,11 @@ public class PlanesDeConvalidacionDTO
         this.anioAcademico = anioAcademico;
     }
 
-    public List<String> getListaInscritos() {
+    public List<UsuarioDTO> getListaInscritos() {
         return listaInscritos;
     }
 
-    public void setListaInscritos(List<String> listaInscritos) {
+    public void setListaInscritos(List<UsuarioDTO> listaInscritos) {
         this.listaInscritos = listaInscritos;
     }
 
