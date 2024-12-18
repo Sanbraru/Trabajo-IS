@@ -50,10 +50,10 @@ public class AsignaturaDAO
         return insertado;
     }
 
-    public static AsignaturaDTO buscarPorID(int id)
+    public static Boolean buscarPorID(int id)
     {
 
-        AsignaturaDTO nuevo = new AsignaturaDTO();
+        Boolean encontrado = false;
 
         try
         {
@@ -69,14 +69,11 @@ public class AsignaturaDAO
             if(rs != null && rs.next())
             {
 
-                String nombreAsignatura = rs.getString("nombreAsignatura");
-            
-                nuevo = new AsignaturaDTO(id, nombreAsignatura);
-
+                encontrado = true;
             }
             else
             {
-                nuevo = null;
+                encontrado = false;
             }
 
             pstmt.close(); // Cierra el PreparedStatement
@@ -89,7 +86,7 @@ public class AsignaturaDAO
 			e.printStackTrace();
         }
 
-        return nuevo;
+        return encontrado;
 
     }
     

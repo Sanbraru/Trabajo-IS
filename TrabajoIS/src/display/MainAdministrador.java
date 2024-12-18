@@ -37,12 +37,21 @@ public class MainAdministrador
                     int idPlan = scanner.nextInt();
 
                     ArrayList<UsuarioDTO> Usuarios = GestorAdministradores.obtenerUsuarios(idPlan);
+
+                    for(UsuarioDTO usuario : Usuarios)
+                    {
+                        System.out.println(usuario.toString());
+                    }
                     
                     break;
                 case 2:
                     System.out.println("Introduzca los datos del nuevo Plan de convalidación: ");
                     System.out.println("ID del nuevo Plan: ");
                     idPlan = scanner.nextInt();
+                    if(GestorAdministradores.buscarPlan(idPlan))
+                    {
+                        System.out.println("Ese plan ya eiste.");
+                    }
                     scanner.nextLine(); // Limpiar buffer
                     System.out.println("El plan será para maestros?(true|false): ");
                     Boolean tipoUsuario = scanner.nextBoolean();
@@ -152,24 +161,29 @@ public class MainAdministrador
 
                 break;
                 case 5:
-
                 System.out.println("Introduzca los datos de la nueva asignatura: ");
                 System.out.println("ID de la nueva asignatura: ");
                 int idAsignatura = scanner.nextInt();
                 scanner.nextLine(); // Limpiar buffer
+                if(GestorAdministradores.buscarAsignatura(idAsignatura))
+                {
+                    System.out.println("Esta asignatura ya existe.");
+                    break;
+                }
                 System.out.println("Nombre de la nueva asignatura: ");
                 String nombre = scanner.nextLine();
                 scanner.nextLine(); // Limpiar buffer
 
                 AsignaturaDTO nuevaAsig = new AsignaturaDTO(idAsignatura, nombre);
 
-                if(!GestorAdministradores.insertarAsignatura(nuevaAsig))
+                if(GestorAdministradores.insertarAsignatura(nuevaAsig))
                 {
-                    System.out.println("Error al insertar la asignatura");
+                    System.out.println("Asignatura insertada con exito.");
                 }
                 else
                 {
-                System.out.println("Asignatura insertada con exito");
+                    System.out.println("Error al insertar la asignatura.");
+
                 }
 
                 break;

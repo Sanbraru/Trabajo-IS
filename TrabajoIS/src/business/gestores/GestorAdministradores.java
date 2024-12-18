@@ -40,18 +40,23 @@ public class GestorAdministradores
         return true;
     }
     
-    // public static boolean insertarAsignatura(AsignaturaDTO n)
-    // {
-    //     if(!AsignaturaDAO.insertAsignatura(n))
-    //     {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-    // public static AsignaturaDTO buscarAsignatura(int id)
-    // {
-    //     return AsignaturaDAO.buscarPorID(id);
-    // }
+    public static boolean insertarAsignatura(AsignaturaDTO n)
+    {
+        if(!AsignaturaDAO.insertAsignatura(n))
+        {
+            return false;
+        }
+        return true;
+    }
+    public static Boolean buscarAsignatura(int id)
+    {
+        return AsignaturaDAO.buscarPorID(id);
+    }
+
+    public static Boolean buscarPlan(int id)
+    {
+        return PlanesDeConvalidacionDAO.buscarPorID(id);
+    }
 
     public static ArrayList<AsignaturaDTO> obtenerAsignaturas()
     {

@@ -205,5 +205,45 @@ public class PlanesDeConvalidacionDAO {
 
     }
 
+    public static Boolean buscarPorID(int id)
+    {
+
+        Boolean encontrado = false;
+
+        try
+        {
+            
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection();
+            String cola = SqlProperties.getClave("sqlPlanesCONV.properties", "selectPlanPorID");
+
+            PreparedStatement pstmt = connection.prepareStatement(cola);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs != null && rs.next())
+            {
+
+                encontrado = true;
+            }
+            else
+            {
+                encontrado = false;
+            }
+
+            pstmt.close(); // Cierra el PreparedStatement
+            dbConnection.closeConnection(); // Cierra la conexión
+    
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+			e.printStackTrace();
+        }
+
+        return encontrado;
+
+    }
+
 }
 
