@@ -36,7 +36,7 @@ public class MainAdministrador
                     System.out.println("Introduzca el ID del Plan: ");
                     int idPlan = scanner.nextInt();
 
-                    ArrayList<UsuarioDTO> Usuarios ;
+                    ArrayList<UsuarioDTO> Usuarios = GestorAdministradores.obtenerUsuarios(idPlan);
                     
                     break;
                 case 2:
@@ -119,6 +119,8 @@ public class MainAdministrador
                 {
                     System.out.println(plan.toString());
                 }
+
+                //Falta la logica
 
 
                 break;

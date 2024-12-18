@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import business.classes.*;
 import data.dao.PlanesDeConvalidacionDAO;
+import data.dao.UsuarioDAO;
 import data.dao.AsignaturaDAO;
 
 
@@ -10,19 +11,10 @@ import data.dao.AsignaturaDAO;
 public class GestorAdministradores
 {
 
-    // public static ArrayList<UsuarioDTO> buscarApuntados(int id)
-    // {
-    //     ArrayList<UsuarioDTO> listaApuntados = null;
-
-    //     // if((listaApuntados = PlanesDeConvalidacionDAO.requestApuntados(id)) != null)
-    //     // {
-
-    //     //     return listaApuntados;
-
-    //     // }
-
-    //     return listaApuntados;
-    // }
+    public static ArrayList<UsuarioDTO> obtenerUsuarios(int ID)
+    {
+        return UsuarioDAO.requestIdPlan(ID);
+    }
 
     public static boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
     {
@@ -73,15 +65,8 @@ public class GestorAdministradores
 
     }
 
-    // public static ArrayList<PlanesDeConvalidacionDTO> obtenerPlanes();
-    // {
-    //     ArrayList<PlanesDeConvalidacionDTO> listaPlanes = PlanesDeConvalidacionDAO.requestPlanes();
-
-    //     for(PlanesDeConvalidacionDTO plan : listaPlanes)
-    //     {
-    //         plan.setAsignaturasOrigen(AsignaturaDAO.buscarPorIDPlan(plan.getId()));
-    //     }
-
-    //     return listaPlanes;
-    // }
+    public static ArrayList<PlanesDeConvalidacionDTO> obtenerPlanes()
+    {
+        return PlanesDeConvalidacionDAO.requestPlanes();
+    }
 }

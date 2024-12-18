@@ -150,7 +150,7 @@ public class PlanesDeConvalidacionDAO {
                 Boolean vigente = rs.getBoolean("Vigente");
                 int anoAcademico = rs.getInt("AnoAcademico");
 
-                PlanesDeConvalidacionDTO nuevo = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, null, null, vigente, anoAcademico);
+                PlanesDeConvalidacionDTO nuevo = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, vigente, anoAcademico);
 
                 listaPlanes.add(nuevo);
 

@@ -1,6 +1,7 @@
 package data.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import business.classes.AsignaturaDTO;
 import business.classes.UsuarioDTO;
@@ -104,33 +105,38 @@ public class UsuarioDAO {
              String cola = SqlProperties.getClave("sql.properties", "requestIDPlan");
 
              PreparedStatement pstmt = connection.prepareStatement(cola);
-             pstmt.setInt(1, id);
-             ResultSet rs = pstmt.executeQuery();
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
 
-             if(rs != null && rs.next())
-             {
 
-                 String nombreAsignatura = rs.getString("nombreAsignatura");
-             
-                 nuevo = new AsignaturaDTO(id, nombreAsignatura);
+            while(rs.next())
+            {
 
-             }
-             else
-             {
-                 nuevo = null;
-             }
+                String correo = rs.getString("Correo");
+                String contrasena = rs.getString("Contrasena");
+                String nombre = rs.getString("Nombre");
+                String apellidos = rs.getString("Apellidos");
+                String DNI = rs.getString("DNI");
 
-             pstmt.close(); // Cierra el PreparedStatement
-             dbConnection.closeConnection(); // Cierra la conexión
-     
-         }
-         catch (Exception e)
-         {
-             System.err.println(e);
- 			e.printStackTrace();
-         }
+                UsuarioDTO nuevo = new UsuarioDTO(correo, contrasena, nombre, apellidos, DNI, id);
 
-         return nuevo;
+                aux.add(nuevo);
+
+            }
+
+            pstmt.close();
+
+            dbConnection.closeConnection();            
+
+        }
+        catch (Exception e) 
+        {
+            System.err.println(e);
+			e.printStackTrace();
+        }
+
+
+         return aux;
     	
     }
  }
