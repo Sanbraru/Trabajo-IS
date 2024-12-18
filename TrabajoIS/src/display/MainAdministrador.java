@@ -36,7 +36,7 @@ public class MainAdministrador
                     System.out.println("Introduzca el ID del Plan: ");
                     int idPlan = scanner.nextInt();
 
-                    //ArrayList<UsuarioDTO> listaApuntados = GestorAdministradores.buscarApuntados(idPlan);
+                    // ArrayList<int> listaApuntados = GestorAdministradores.buscarApuntados(idPlan);
 
                     
                     break;
@@ -107,7 +107,15 @@ public class MainAdministrador
                     break;
                 case 3:
                 System.out.println("Accediendo al historial de los planes...");
-                
+                System.out.println("PLANES DE CONVALIDACION ---");
+
+                ArrayList<PlanesDeConvalidacionDTO> planes = GestorAdministradores.obtenerPlanes();
+                for(PlanesDeConvalidacionDTO plan : planes)
+                {
+                    System.out.println(plan.toString());
+                }
+
+
                 break;
                 case 4:
                 System.out.println("Accediendo a opciones...");

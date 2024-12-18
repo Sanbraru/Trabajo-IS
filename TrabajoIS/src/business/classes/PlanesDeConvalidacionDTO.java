@@ -106,4 +106,19 @@ public class PlanesDeConvalidacionDTO
         this.listaInscritos = listaInscritos;
     }
 
+    //toString
+    @Override
+    public String toString()
+    {
+        return "Plan de Convalidacion [Nombre: " + id +
+               ", Destinado a: " + (tipoUsuario ? "Profesores" : "Alumnos") +
+               ", Duracion: " + tiempoPlan +
+               ", Centro de Destino: " + centroDestino +
+               ", Asignaturas de Origen: " + asignaturasOrigen  + 
+               ", Asignaturas de Destino: " + asignaturasDestino + 
+               ", Estado de vigencia: " + (vigente ? "Vigente" : "No vigente") + 
+               ", Año academico: " + anioAcademico + 
+               ", Destinado a: " + listaInscritos + "]"; 
+    }
+
 }
