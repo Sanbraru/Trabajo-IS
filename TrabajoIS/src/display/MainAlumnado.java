@@ -9,8 +9,8 @@ public class MainAlumnado
 
         while (!salir) {
             System.out.println("\n=== MENU ALUMNADO ===");
-            System.out.println("1. Ver Perfil");
-            System.out.println("2. Opciones");
+            System.out.println("1. Mostrar Planes de Convalidación disponibles");
+            System.out.println("2. Inscribirse a un Plan de Convalidación");
             System.out.println("3. Cerrar Sesión");
             System.out.print("Seleccione una opción: ");
 
@@ -19,7 +19,7 @@ public class MainAlumnado
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Mostrando perfil del usuario...");
+                    System.out.println("Estos son todos los Planes de Convalidación disponibles.");
                     break;
                 case 2:
                     System.out.println("Accediendo a opciones...");

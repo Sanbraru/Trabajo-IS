@@ -9,8 +9,8 @@ public class MainProfesorado
 
         while (!salir) {
             System.out.println("\n=== MENU PROFESORADO ===");
-            System.out.println("1. Ver Perfil");
-            System.out.println("2. Opciones");
+            System.out.println("1. Mostrar Planes de Convalidación disponibles");
+            System.out.println("2. Inscribirse a un Plan de Convalidación");
             System.out.println("3. Cerrar Sesión");
             System.out.print("Seleccione una opción: ");
 
