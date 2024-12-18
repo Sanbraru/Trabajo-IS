@@ -7,7 +7,6 @@ public class AlumnadoDTO extends UsuarioDTO
     private int anioAcademico;
     private String centroOrigen;
     private boolean solicitaAyuda;
-    private boolean inscrito;
     private boolean realizado;
 
     //Constructores
@@ -17,7 +16,7 @@ public class AlumnadoDTO extends UsuarioDTO
     // Constructor parametrizado
     public AlumnadoDTO(String correo, String contrasena, String nombre, String apellidos, String dni, int idPlan,
                     int telefono, int anioAcademico, String centroOrigen,
-                    boolean solicitaAyuda, boolean inscrito, boolean realizado) 
+                    boolean solicitaAyuda, boolean realizado) 
     {
 
         super(correo, contrasena, nombre, apellidos, dni, idPlan); // Llamada al constructor de la clase padre
@@ -25,7 +24,6 @@ public class AlumnadoDTO extends UsuarioDTO
         this.anioAcademico = anioAcademico;
         this.centroOrigen = centroOrigen;
         this.solicitaAyuda = solicitaAyuda;
-        this.inscrito = inscrito;
         this.realizado = realizado;
     }
 
@@ -60,14 +58,6 @@ public class AlumnadoDTO extends UsuarioDTO
 
     public void setSolicitaAyuda(boolean solicitaAyuda) {
         this.solicitaAyuda = solicitaAyuda;
-    }
-
-    public boolean isInscrito() {
-        return inscrito;
-    }
-
-    public void setInscrito(boolean inscrito) {
-        this.inscrito = inscrito;
     }
 
     public boolean isRealizado() {

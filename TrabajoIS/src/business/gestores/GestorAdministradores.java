@@ -10,30 +10,54 @@ import data.dao.AsignaturaDAO;
 public class GestorAdministradores
 {
 
-    public ArrayList<UsuarioDTO> buscarApuntados(int id)
+    public static ArrayList<UsuarioDTO> buscarApuntados(int id)
     {
         ArrayList<UsuarioDTO> listaApuntados = null;
+
+        if((listaApuntados = PlanesDeConvalidacionDAO.requestApuntados(id)) != null)
+        {
+
+            return listaApuntados;
+
+        }
 
         return listaApuntados;
     }
 
-    public boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
+    public static boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
     {
 
-        if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
+        if(nuevoPlan.getTiempoPlan() <=0 || nuevoPlan.getTiempoPlan() < 10 )
         {
             return false;
         }
+        else if(nuevoPlan.getCentroDestino() == "\0")
+        {
+            return false;
+        }
+        else if(nuevoPlan.getAnioAcademico() < 2024)
+        {
+            return false;
+        }
+        else if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
+        {
+            return false;
+        }
+
         
         return true;
     }
     
-    public boolean insertarAsignatura(AsignaturaDTO n)
+    public static boolean insertarAsignatura(AsignaturaDTO n)
     {
         if(!AsignaturaDAO.insertAsignatura(n))
         {
             return false;
         }
         return true;
+    }
+    public static AsignaturaDTO buscarAsignatura(int id)
+    {
+        return AsignaturaDAO.buscarPorID(id);
     }
 }

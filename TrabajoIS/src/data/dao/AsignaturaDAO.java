@@ -50,4 +50,47 @@ public class AsignaturaDAO
         return insertado;
     }
 
+    public static AsignaturaDTO buscarPorID(int id)
+    {
+
+        AsignaturaDTO nuevo = new AsignaturaDTO();
+
+        try
+        {
+            
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection();
+            String cola = SqlProperties.getClave("sqlAsignatura.properties", "selectAsignaturaPorID");
+
+            PreparedStatement pstmt = connection.prepareStatement(cola);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(rs != null && rs.next())
+            {
+
+                String nombreAsignatura = rs.getString("nombreAsignatura");
+            
+                nuevo = new AsignaturaDTO(id, nombreAsignatura);
+
+            }
+            else
+            {
+                nuevo = null;
+            }
+
+            pstmt.close(); // Cierra el PreparedStatement
+            dbConnection.closeConnection(); // Cierra la conexión
+    
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+			e.printStackTrace();
+        }
+
+        return nuevo;
+
+    }
+
 }
