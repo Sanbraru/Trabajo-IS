@@ -69,7 +69,13 @@ System.out.println("Estos son todos los Planes de Convalidación disponibles.");
                     
                     break;
                 case 2:
-                    System.out.println("Accediendo a opciones...");
+                    System.out.println("Escriba el ID del Plan al que quiere inscribirse:");
+                    int numero = scanner.nextInt();
+                	scanner.nextLine(); 
+                	System.out.println("Escriba su contraseña para confirmar:");
+                	String contrasena = scanner.nextLine();
+                	
+                	GestorProfesorado.inscribirse(numero, contrasena);
                     break;
                 case 3:
                     System.out.println("Cerrando sesión...");

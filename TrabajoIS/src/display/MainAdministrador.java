@@ -88,7 +88,7 @@ public class MainAdministrador
                         {
                         
                             for(AsignaturaDTO asignatura : listaAsig)
-                            {
+                            {                            	
                                 System.out.println(asignatura.toString());
                             }
                             System.out.println("Elija una(O escriba un numero igual o menor que '0' para salir): ");

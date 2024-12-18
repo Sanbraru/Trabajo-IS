@@ -33,5 +33,10 @@ public class GestorProfesorado
 		return ProfesoradoDAO.viewAsignaturas(id);
 		
 	}
+	
+	public static void inscribirse(int n, String c)
+	{
+		ProfesoradoDAO.apuntarse(n,c);
+	}
 }
 

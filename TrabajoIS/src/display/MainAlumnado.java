@@ -70,7 +70,10 @@ public class MainAlumnado
                     System.out.println("Escriba el ID del Plan al que quiere inscribirse:");
                     int numero = scanner.nextInt();
                 	scanner.nextLine(); 
+                	System.out.println("Escriba su contraseña para confirmar:");
+                	String contrasena = scanner.nextLine();
                 	
+                	GestorAlumnado.inscribirse(numero, contrasena);
                 	
                     break;
                 case 3:

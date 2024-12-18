@@ -33,4 +33,9 @@ public class GestorAlumnado
 		return AlumnadoDAO.viewAsignaturas(id);
 		
 	}
+	
+	public static void inscribirse(int n, String c)
+	{
+		AlumnadoDAO.apuntarse(n,c);
+	}
 }

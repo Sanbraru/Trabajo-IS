@@ -112,7 +112,7 @@ public class AsignaturaDAO
                 AsignaturaDTO nueva = new AsignaturaDTO(idAsignatura, nombre);
 
                 aux.add(nueva);
-
+                
             }
 
             stmt.close(); // Cierra el PreparedStatement

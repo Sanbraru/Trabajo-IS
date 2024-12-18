@@ -157,4 +157,32 @@ public class ProfesoradoDAO {
         // Retornar la lista de planes
         return planes;
     }
+    
+    public static void apuntarse(int numero, String contrasena) {
+        // Obtener la consulta SQL desde las propiedades
+        String sqlQuery = SqlProperties.getClave("sql.properties", "apuntarse");
+
+        // Abrir la conexión y ejecutar la consulta
+        try (Connection connection = new DBConnection().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
+
+            // Establecer los parámetros en la consulta
+            pstmt.setInt(1, numero);      // El ID del plan de convalidación
+            pstmt.setString(2, contrasena); // La contraseña del usuario
+
+            // Ejecutar la consulta de actualización
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Confirmar si la actualización fue exitosa
+            if (rowsAffected > 0) {
+                System.out.println("¡El usuario se ha inscrito correctamente al plan de convalidación!");
+            } else {
+                System.out.println("No se encontró un usuario con esa contraseña o no se pudo realizar la inscripción.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Imprimir el error si ocurre una excepción
+        }
+    }
+
 }
