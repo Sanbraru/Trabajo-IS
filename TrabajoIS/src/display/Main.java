@@ -92,7 +92,7 @@ public class Main
                     
                     String respuesta = scanner.nextLine();
                     
-                    GestorUsuarios.crearUsuario(nuevoUsuario);
+                    int idUsuario = GestorUsuarios.crearUsuario(nuevoUsuario);
                     
                     if (respuesta.equalsIgnoreCase("a"))
                     {
@@ -128,7 +128,7 @@ public class Main
                     	    realizado == 0 // Convertir 1/0 a booleano
                     	);
 
-                        if(GestorAlumnado.crearAlumno(nuevoAlumno) == true)
+                        if(GestorAlumnado.crearAlumno(nuevoAlumno, idUsuario) == true)
                         {
                         	System.out.println("Su cuenta ha sido creada satisfactoriamente.");
                         }
@@ -165,7 +165,7 @@ public class Main
                     	    realizado == 0 // Convertir 1/0 a booleano
                     	);
                     	
-                    	if(GestorProfesorado.crearProfesor(nuevoProfesor) == true)
+                    	if(GestorProfesorado.crearProfesor(nuevoProfesor, idUsuario) == true)
                         {
                         	System.out.println("Su cuenta ha sido creada satisfactoriamente.");
                         }

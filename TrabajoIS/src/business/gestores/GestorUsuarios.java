@@ -21,19 +21,9 @@ public class GestorUsuarios
     	}
     }
     
-    public static boolean crearUsuario(UsuarioDTO nuevoUsuario)
+    public static int crearUsuario(UsuarioDTO nuevoUsuario)
     {
     	return UsuarioDAO.addUser(nuevoUsuario);
-    }
-    
-    public static boolean crearAlumno(UsuarioDTO nuevoUsuario)
-    {
-    	return UsuarioDAO.addStudent(nuevoUsuario);
-    }
-    
-    public static boolean crearProfesor(UsuarioDTO nuevoUsuario)
-    {
-    	return UsuarioDAO.addTeacher(nuevoUsuario);
     }
 }
 

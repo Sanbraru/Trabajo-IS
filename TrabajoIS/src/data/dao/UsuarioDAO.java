@@ -57,8 +57,8 @@ public class UsuarioDAO {
         return rol;  // Devolver el rol del usuario (o null si no se encontró)
     }
     
-    public static boolean addUser(UsuarioDTO nuevoUsuario) {
-        boolean exito = false;
+    public static int addUser(UsuarioDTO nuevoUsuario) {
+        int idUsuarioGenerado = -1;
 
         // Usamos try-with-resources para asegurar el cierre de recursos automáticamente
         try (Connection connection = new DBConnection().getConnection();
@@ -76,12 +76,16 @@ public class UsuarioDAO {
 
             // Si se afectaron filas, la inserción fue exitosa
             if (filasAfectadas > 0) {
-                exito = true;  // La inserción fue exitosa
+            	try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        idUsuarioGenerado = generatedKeys.getInt(1);
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();  // Imprimir el error si ocurre una excepción
         }
 
-        return exito;  // Devolver true si la inserción fue exitosa, false en caso contrario
+        return idUsuarioGenerado;  // Devolver true si la inserción fue exitosa, false en caso contrario
     }
 }
