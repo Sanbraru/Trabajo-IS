@@ -52,70 +52,73 @@ public class MainAdministrador
                     {
                         System.out.println("Ese plan ya eiste.");
                     }
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.println("El plan será para maestros?(true|false): ");
-                    Boolean tipoUsuario = scanner.nextBoolean();
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.println("Duración del Plan en meses: ");
-                    int tiempoPlan = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.println("Centro de Destino: ");
-                    String centroDestino = scanner.nextLine();
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.println("Año academico: ");
-                    int anioAcademico = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar buffer
-
-                    PlanesDeConvalidacionDTO nuevoPlan = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, true, anioAcademico);
-
-                    if(GestorAdministradores.insertarPlan(nuevoPlan))
-                    {
-                        System.out.println("Plan Insertado con exito");
-                    }
                     else
-
                     {
-                        System.out.println("Error al insertar el plan");
-                    }
+                        scanner.nextLine(); // Limpiar buffer
+                        System.out.println("El plan será para maestros?(true|false): ");
+                        Boolean tipoUsuario = scanner.nextBoolean();
+                        scanner.nextLine(); // Limpiar buffer
+                        System.out.println("Duración del Plan en meses: ");
+                        int tiempoPlan = scanner.nextInt();
+                        scanner.nextLine(); // Limpiar buffer
+                        System.out.println("Centro de Destino: ");
+                        String centroDestino = scanner.nextLine();
+                        scanner.nextLine(); // Limpiar buffer
+                        System.out.println("Año academico: ");
+                        int anioAcademico = scanner.nextInt();
+                        scanner.nextLine(); // Limpiar buffer
 
+                        PlanesDeConvalidacionDTO nuevoPlan = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, true, anioAcademico);
 
-                    System.out.println("Asingaturas de Origen y Destino: ");
-                    System.out.println("Estas son las asignaturas existentes: ");
-
-                    ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
-                    while(scanner.nextLine() != "siguiente")
-                    {
-                    
-                        for(AsignaturaDTO asignatura : listaAsig)
+                        if(GestorAdministradores.insertarPlan(nuevoPlan))
                         {
-                            System.out.println(asignatura.toString());
+                            System.out.println("Plan Insertado con exito");
                         }
-                        System.out.println("Elija una(O escriba un numero igual o menor que '0' para salir): ");
-                        int idAsignatura = scanner.nextInt();
+                        else
 
-                        System.out.println("Ahora elija si quiere ponerla de Origen o de Destino(true = Origen | false = Destino): ");
-                        Boolean elecTipo = scanner.nextBoolean();
-                        String tipo = (elecTipo ? "Origen" : "Destino");
-
-                        if(idAsignatura > 0)
                         {
-                            Plan_AsignaturasDTO aux = new Plan_AsignaturasDTO(idPlan, idAsignatura, tipo);
-
-                            if(!GestorAdministradores.asignarAsignaturaAPlan(aux))
-                            {
-                                System.out.println("Asignatura añadida con exito.");
-
-                            }
-                            else
-                            {
-
-                                System.out.println("Error al asignar asignatura a plan.");
-                                break;
-                                
-                            }
+                            System.out.println("Error al insertar el plan");
                         }
+
+
+                        System.out.println("Asingaturas de Origen y Destino: ");
+                        System.out.println("Estas son las asignaturas existentes: ");
+
+                        ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
+                        while(scanner.nextLine() != "siguiente")
+                        {
                         
+                            for(AsignaturaDTO asignatura : listaAsig)
+                            {
+                                System.out.println(asignatura.toString());
+                            }
+                            System.out.println("Elija una(O escriba un numero igual o menor que '0' para salir): ");
+                            int idAsignatura = scanner.nextInt();
 
+                            System.out.println("Ahora elija si quiere ponerla de Origen o de Destino(true = Origen | false = Destino): ");
+                            Boolean elecTipo = scanner.nextBoolean();
+                            String tipo = (elecTipo ? "Origen" : "Destino");
+
+                            if(idAsignatura > 0)
+                            {
+                                Plan_AsignaturasDTO aux = new Plan_AsignaturasDTO(idPlan, idAsignatura, tipo);
+
+                                if(!GestorAdministradores.asignarAsignaturaAPlan(aux))
+                                {
+                                    System.out.println("Asignatura añadida con exito.");
+
+                                }
+                                else
+                                {
+
+                                    System.out.println("Error al asignar asignatura a plan.");
+                                    break;
+                                    
+                                }
+                            }
+                            
+
+                        }
                     }
                     break;
                 case 3:
