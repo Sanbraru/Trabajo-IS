@@ -49,13 +49,16 @@ public class MainAlumnado
                             System.out.println("No hay asignaturas asociadas a este plan.");
                         } else {
                             for (Plan_AsignaturasDTO ap : asignaturasPlan) {
-                                // Obtener la información de cada asignatura
+                                
                                 List<AsignaturaDTO> asignaturas = GestorAlumnado.mostrarAsignaturas(ap.getIdAsignatura());
-
+                            
                                 for (AsignaturaDTO asignatura : asignaturas) {
                                     // Imprimir los atributos de la asignatura
                                     System.out.printf("   ID: %d\n", asignatura.getID());
                                     System.out.printf("   Nombre: %s\n", asignatura.getNombre());
+                                    if (asignaturas.isEmpty()) {
+                                        System.out.printf("No se encontraron asignaturas para ID Asignatura: %d\n", ap.getIdAsignatura());
+                                    }
                                 }
                             }
                         }
