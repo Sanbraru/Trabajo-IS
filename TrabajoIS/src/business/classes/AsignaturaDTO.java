@@ -36,4 +36,12 @@ public class AsignaturaDTO
     {
         this.nombre = nombre;
     }
+
+    //toString
+    @Override
+    public String toString()
+    {
+        return "Asignatura [Id: " + ID +
+               ", Nombre: " + nombre + "]"; 
+    }
 }

@@ -138,24 +138,25 @@ public class PlanesDeConvalidacionDAO {
             Connection connection = dbConnection.getConnection();
             String cola = SqlProperties.getClave("sqlPlanesCONV.properties", "requestPlanes");
 
-            PreparedStatement pstmt = connection.prepareStatement(cola);
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = (ResultSet) stmt.executeQuery(cola);
 
-            if(rs != null && rs.next())
+            while(rs.next())
             {
+                int idPlan = rs.getInt("idPlan");
+                Boolean tipoUsuario = rs.getBoolean("tipoUsuario");
+                int tiempoPlan = rs.getInt("TiempoPlan");
+                String centroDestino = rs.getString("CentroDestino");
+                Boolean vigente = rs.getBoolean("Vigente");
+                int anoAcademico = rs.getInt("AnoAcademico");
 
-                String nombreAsignatura = rs.getString("nombreAsignatura");
-            
-                nuevo = new AsignaturaDTO(id, nombreAsignatura);
+                PlanesDeConvalidacionDTO nuevo = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, null, null, vigente, anoAcademico);
+
+                listaPlanes.add(nuevo);
 
             }
-            else
-            {
-                nuevo = null;
-            }
 
-            pstmt.close(); // Cierra el PreparedStatement
+            stmt.close(); // Cierra el PreparedStatement
             dbConnection.closeConnection(); // Cierra la conexión
     
         }

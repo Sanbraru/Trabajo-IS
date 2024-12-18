@@ -23,8 +23,6 @@ public class PlanesDeConvalidacionDTO
         this.tipoUsuario = tipoUsuario;
         this.tiempoPlan = tiempoPlan;
         this.centroDestino = centroDestino;
-        this.asignaturasOrigen = asignaturasOrigen;
-        this.asignaturasDestino = asignaturasDestino;
         this.vigente = vigente;
         this.anioAcademico = anioAcademico;
         this.listaInscritos = new ArrayList<>();

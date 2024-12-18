@@ -76,9 +76,19 @@ public class GestorAdministradores
         return AsignaturaDAO.buscarPorID(id);
     }
 
+    public static ArrayList<AsignaturaDTO> obtenerAsignaturas()
+    {
+        return AsignaturaDAO.requestAll();
+    }
+
     public static ArrayList<PlanesDeConvalidacionDTO> obtenerPlanes();
     {
         ArrayList<PlanesDeConvalidacionDTO> listaPlanes = PlanesDeConvalidacionDAO.requestPlanes();
+
+        for(PlanesDeConvalidacionDTO plan : listaPlanes)
+        {
+            plan.setAsignaturasOrigen(AsignaturaDAO.buscarPorIDPlan(plan.getId()));
+        }
 
         return listaPlanes;
     }

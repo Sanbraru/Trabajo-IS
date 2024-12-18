@@ -93,4 +93,42 @@ public class AsignaturaDAO
 
     }
     
+    public static ArrayList<AsignaturaDTO> requestAll()
+    {
+        ArrayList<AsignaturaDTO> aux = new ArrayList<>();
+
+        try
+        {
+            
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection();
+            String cola = SqlProperties.getClave("sqlAsignatura.properties", "selectAll");
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = (ResultSet) stmt.executeQuery(cola);
+
+            while(rs.next())
+            {
+                int idAsignatura = rs.getInt("idAsignatura");
+                String nombre = rs.getString("nombreAsignatura");
+                
+                AsignaturaDTO nueva = new AsignaturaDTO(idAsignatura, nombre);
+
+                aux.add(nueva);
+
+            }
+
+            stmt.close(); // Cierra el PreparedStatement
+            dbConnection.closeConnection(); // Cierra la conexión
+    
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+			e.printStackTrace();
+        }
+
+        return aux;
+    }
+
 }

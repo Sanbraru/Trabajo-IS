@@ -53,8 +53,24 @@ public class MainAdministrador
                     scanner.nextLine(); // Limpiar buffer
                     System.out.println("Centro de Destino: ");
                     String centroDestino = scanner.nextLine();
-                    System.out.println("Asingaturas de Origen(Escriba 'siguiente' cuando haya terminado): ");
-                    ArrayList<AsignaturaDTO> listaAsignaturasOrigen = new ArrayList<>();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.println("Año academico: ");
+                    int anioAcademico = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+
+
+                    System.out.println("Asingaturas de Origen: ");
+                    System.out.println("Estas son las asignaturas existentes: ");
+
+                    ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
+                    
+                    for(AsignaturaDTO asignatura : listaAsig)
+                    {
+                        System.out.println(asignatura.toString());
+                    }
+
+
+                    System.out.println("Asingaturas de Origen: ");
                     AsignaturaDTO asignatura = new AsignaturaDTO();
                     scanner.nextLine(); // Limpiar buffer
                     while((scanner.nextLine()) != "siguiente")
@@ -89,10 +105,6 @@ public class MainAdministrador
 
                         }
                     }
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.println("Año academico: ");
-                    int anioAcademico = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar buffer
 
                     PlanesDeConvalidacionDTO nuevoPlan = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, listaAsignaturasOrigen, listaAsignaturasDestino, true, anioAcademico);
 
