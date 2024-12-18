@@ -58,7 +58,7 @@ public class UsuarioDAO {
     }
     
     public static int addUser(UsuarioDTO nuevoUsuario) {
-        int idUsuarioGenerado = -1;
+        int idUsuarioGenerado = 0;
 
         // Usamos try-with-resources para asegurar el cierre de recursos automáticamente
         try (Connection connection = new DBConnection().getConnection();
@@ -70,7 +70,7 @@ public class UsuarioDAO {
             pstmt.setString(3, nuevoUsuario.getNombre());
             pstmt.setString(4, nuevoUsuario.getApellidos());
             pstmt.setString(5, nuevoUsuario.getDni());
-            pstmt.setInt(6, -1);
+    
 
             // Ejecutar la consulta de inserción
             int filasAfectadas = pstmt.executeUpdate();  // executeUpdate() se usa para operaciones de modificación (INSERT, UPDATE, DELETE)
