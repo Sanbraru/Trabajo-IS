@@ -6,7 +6,7 @@ public class PlanesDeConvalidacionDTO
 
     private String id;
     private boolean tipoUsuario;
-    private String tiempoPlan;
+    private int tiempoPlan;
     private String centroDestino;
     private List<String> asignaturasOrigen; //A revisar
     private List<String> asignaturasDestino;//A revisar
@@ -18,7 +18,7 @@ public class PlanesDeConvalidacionDTO
     public PlanesDeConvalidacionDTO() {}
 
     // Constructor parametrizado
-    public PlanesDeConvalidacionDTO(String id, boolean tipoUsuario, String tiempoPlan, String centroDestino,
+    public PlanesDeConvalidacionDTO(String id, boolean tipoUsuario, int tiempoPlan, String centroDestino,
                                 List<String> asignaturasOrigen, List<String> asignaturasDestino,
                                 boolean vigente, int anioAcademico, List<String> listaInscritos) {
         this.id = id;
@@ -49,11 +49,11 @@ public class PlanesDeConvalidacionDTO
         this.tipoUsuario = tipoUsuario;
     }
 
-    public String getTiempoPlan() {
+    public int getTiempoPlan() {
         return tiempoPlan;
     }
 
-    public void setTiempoPlan(String tiempoPlan) {
+    public void setTiempoPlan(int tiempoPlan) {
         this.tiempoPlan = tiempoPlan;
     }
 
