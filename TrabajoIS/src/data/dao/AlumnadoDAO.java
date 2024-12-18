@@ -47,7 +47,7 @@ public class AlumnadoDAO {
 
     public static List<PlanesDeConvalidacionDTO> viewPlans() {
         // Cadena de conexión, consulta SQL, y conexión a la base de datos
-        String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlansStudents");
+        String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlans");
         List<PlanesDeConvalidacionDTO> planes = new ArrayList<>();
 
         // Abrir la conexión y ejecutar la consulta
@@ -55,7 +55,7 @@ public class AlumnadoDAO {
              PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
 
             // Establecer los parámetros en la consulta (si es necesario)
-            pstmt.setInt(1, 1);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
+            pstmt.setInt(1, 0);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
 
             // Ejecutar la consulta de selección
             ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT

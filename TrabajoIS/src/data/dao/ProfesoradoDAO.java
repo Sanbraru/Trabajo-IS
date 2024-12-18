@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import business.classes.AsignaturaDTO;
+import business.classes.Plan_AsignaturasDTO;
+import business.classes.PlanesDeConvalidacionDTO;
 import business.classes.ProfesoradoDTO;
 import data.common.conection.DBConnection;
 import data.common.sql.SqlProperties;
@@ -41,10 +46,10 @@ public class ProfesoradoDAO {
         return exito;  // Devolver true si la inserción fue exitosa, false en caso contrario
     }
     
-    public static void viewPlans() {
+    public static List<PlanesDeConvalidacionDTO> viewPlans() {
         // Cadena de conexión, consulta SQL, y conexión a la base de datos
-        String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlansTeachers");
-        
+        String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlans");
+        List<PlanesDeConvalidacionDTO> planes = new ArrayList<>();
         // Abrir la conexión y ejecutar la consulta
         try (Connection connection = new DBConnection().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
@@ -56,26 +61,100 @@ public class ProfesoradoDAO {
             ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT
 
             // Mostrar los resultados
-            System.out.println("Planes de Convalidación Disponibles:");
+           
             while (resultSet.next()) {
+                // Obtener los valores de cada columna en el ResultSet
                 int id = resultSet.getInt("ID");
-                int tipoUsuario = resultSet.getInt("TipoUsuario");
+                boolean tipoUsuario = resultSet.getBoolean("TipoUsuario");
                 int tiempoPlan = resultSet.getInt("TiempoPlan");
                 String centroDestino = resultSet.getString("CentroDestino");
-                int asignaturaOrigen = resultSet.getInt("IdAsignaturasOrigen");
-                int asignaturaDestino = resultSet.getInt("IdAsignaturasDestino");
                 boolean vigente = resultSet.getBoolean("Vigente");
                 int anoAcademico = resultSet.getInt("AnoAcademico");
-                
-                // Mostrar cada plan de convalidación
-                System.out.println("ID: " + id + ", Tipo Usuario: " + tipoUsuario + ", Tiempo Plan: " + tiempoPlan +
-                        ", Centro Destino: " + centroDestino + ", Asignatura Origen: " + asignaturaOrigen +
-                        ", Asignatura Destino: " + asignaturaDestino + ", Vigente: " + vigente +
-                        ", Año Académico: " + anoAcademico);
+
+                // Crear un nuevo objeto PlanesDeConvalidacionDTO
+                PlanesDeConvalidacionDTO plan = new PlanesDeConvalidacionDTO(id, tipoUsuario, tiempoPlan, centroDestino, vigente, anoAcademico);
+
+                // Añadir el plan a la lista
+                planes.add(plan);
             }
             
         } catch (SQLException e) {
             e.printStackTrace();  // Imprimir el error si ocurre una excepción
         }
+		return planes;
+    }
+    
+    public static List<Plan_AsignaturasDTO> viewPlansAsignaturas(int id_P) {
+        // Cadena de conexión, consulta SQL, y conexión a la base de datos
+        String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlansAsignaturas");
+        List<Plan_AsignaturasDTO> planes = new ArrayList<>();
+
+        // Abrir la conexión y ejecutar la consulta
+        try (Connection connection = new DBConnection().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
+
+            // Establecer los parámetros en la consulta (si es necesario)
+            pstmt.setInt(1, id_P);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
+
+            // Ejecutar la consulta de selección
+            ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT
+
+            // Mostrar los resultados
+            while (resultSet.next()) {
+                // Obtener los valores de cada columna en el ResultSet
+            	
+                int id_A = resultSet.getInt("id_asignatura");
+                String tipo_A = resultSet.getString("tipo_asignatura");
+
+
+                // Crear un nuevo objeto PlanesDeConvalidacionDTO
+                Plan_AsignaturasDTO plan = new Plan_AsignaturasDTO(id_P, id_A, tipo_A);
+
+                // Añadir el plan a la lista
+                planes.add(plan);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Imprimir el error si ocurre una excepción
+        }
+
+        // Retornar la lista de planes
+        return planes;
+    }
+    
+    public static List<AsignaturaDTO> viewAsignaturas(int id) {
+        // Cadena de conexión, consulta SQL, y conexión a la base de datos
+        String sqlQuery = SqlProperties.getClave("sql.properties", "viewAsignaturas");
+        List<AsignaturaDTO> planes = new ArrayList<>();
+
+        // Abrir la conexión y ejecutar la consulta
+        try (Connection connection = new DBConnection().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
+
+            // Establecer los parámetros en la consulta (si es necesario)
+            pstmt.setInt(1, id);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
+
+            // Ejecutar la consulta de selección
+            ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT
+
+
+            while (resultSet.next()) {
+
+                String nombreAs = resultSet.getString("nombreAsignatura");
+
+                // Crear un nuevo objeto PlanesDeConvalidacionDTO
+                AsignaturaDTO plan = new AsignaturaDTO(id, nombreAs);
+
+                // Añadir el plan a la lista
+                planes.add(plan);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Imprimir el error si ocurre una excepción
+        }
+
+        // Retornar la lista de planes
+        return planes;
     }
 }

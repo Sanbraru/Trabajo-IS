@@ -1,7 +1,13 @@
 package display;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import business.classes.AsignaturaDTO;
+import business.classes.Plan_AsignaturasDTO;
+import business.classes.PlanesDeConvalidacionDTO;
+import business.gestores.GestorAlumnado;
 import business.gestores.GestorProfesorado;
 
 public class MainProfesorado
@@ -21,9 +27,45 @@ public class MainProfesorado
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Estos son todos los Planes de Convalidación disponibles.");
+System.out.println("Estos son todos los Planes de Convalidación disponibles.");
                     
-                    GestorProfesorado.mostrarPlanes();
+                    List<PlanesDeConvalidacionDTO> Planes = new ArrayList<>();
+                    		
+                    Planes = GestorProfesorado.mostrarPlanes();
+                    
+                    for (PlanesDeConvalidacionDTO plan : Planes) 
+                    {
+                        // Imprimir cada uno de los atributos
+                        System.out.printf("ID: %d\n", plan.getId());
+                        System.out.printf("Tipo Usuario: %b\n", plan.isTipoUsuario());
+                        System.out.printf("Tiempo Plan: %d\n", plan.getTiempoPlan());
+                        System.out.printf("Centro Destino: %s\n", plan.getCentroDestino());
+                        System.out.printf("Vigente: %b\n", plan.isVigente());
+                        System.out.printf("Año Académico: %d\n", plan.getAnioAcademico());
+                        
+                        System.out.printf("Asignaturas asociadas:");
+                        
+                        List<Plan_AsignaturasDTO> asignaturasPlan = GestorProfesorado.mostrarPlanesAsignaturas(plan.getId());
+
+                        if (asignaturasPlan.isEmpty()) {
+                            System.out.println("No hay asignaturas asociadas a este plan.");
+                        } else {
+                            for (Plan_AsignaturasDTO ap : asignaturasPlan) {
+                                
+                                List<AsignaturaDTO> asignaturas = GestorProfesorado.mostrarAsignaturas(ap.getIdAsignatura());
+                            
+                                for (AsignaturaDTO asignatura : asignaturas) {
+                                    // Imprimir los atributos de la asignatura
+                                    System.out.printf("   ID: %d\n", asignatura.getID());
+                                    System.out.printf("   Nombre: %s\n", asignatura.getNombre());
+                                    if (asignaturas.isEmpty()) {
+                                        System.out.printf("No se encontraron asignaturas para ID Asignatura: %d\n", ap.getIdAsignatura());
+                                    }
+                                }
+                            }
+                        }
+                        System.out.println("--------------------------------------------------");
+                    }
                     
                     break;
                 case 2:

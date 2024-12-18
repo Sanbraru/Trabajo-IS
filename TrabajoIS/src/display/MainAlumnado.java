@@ -67,7 +67,11 @@ public class MainAlumnado
                     
                     break;
                 case 2:
-                    System.out.println("Accediendo a opciones...");
+                    System.out.println("Escriba el ID del Plan al que quiere inscribirse:");
+                    int numero = scanner.nextInt();
+                	scanner.nextLine(); 
+                	
+                	
                     break;
                 case 3:
                     System.out.println("Cerrando sesión...");
