@@ -31,6 +31,37 @@ public class MainAlumnado
                     		
                     Planes = GestorAlumnado.mostrarPlanes();
                     
+                    for (PlanesDeConvalidacionDTO plan : Planes) 
+                    {
+                        // Imprimir cada uno de los atributos
+                        System.out.printf("ID: %d\n", plan.getId());
+                        System.out.printf("Tipo Usuario: %b\n", plan.isTipoUsuario());
+                        System.out.printf("Tiempo Plan: %d\n", plan.getTiempoPlan());
+                        System.out.printf("Centro Destino: %s\n", plan.getCentroDestino());
+                        System.out.printf("Vigente: %b\n", plan.isVigente());
+                        System.out.printf("Año Académico: %d\n", plan.getAnioAcademico());
+                        
+                        System.out.printf("Asignaturas asociadas:");
+                        
+                        List<Plan_AsignaturasDTO> asignaturasPlan = GestorAlumnado.mostrarPlanesAsignaturas(plan.getId());
+
+                        if (asignaturasPlan.isEmpty()) {
+                            System.out.println("No hay asignaturas asociadas a este plan.");
+                        } else {
+                            for (Plan_AsignaturasDTO ap : asignaturasPlan) {
+                                // Obtener la información de cada asignatura
+                                List<AsignaturaDTO> asignaturas = GestorAlumnado.mostrarAsignaturas(ap.getIdAsignatura());
+
+                                for (AsignaturaDTO asignatura : asignaturas) {
+                                    // Imprimir los atributos de la asignatura
+                                    System.out.printf("   ID: %d\n", asignatura.getID());
+                                    System.out.printf("   Nombre: %s\n", asignatura.getNombre());
+                                }
+                            }
+                        }
+                        System.out.println("--------------------------------------------------");
+                    }
+                    
                     break;
                 case 2:
                     System.out.println("Accediendo a opciones...");

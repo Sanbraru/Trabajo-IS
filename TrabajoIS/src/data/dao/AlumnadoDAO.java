@@ -9,6 +9,7 @@ import java.util.List;
 
 import business.classes.AlumnadoDTO;
 import business.classes.AsignaturaDTO;
+import business.classes.Plan_AsignaturasDTO;
 import business.classes.PlanesDeConvalidacionDTO;
 import data.common.conection.DBConnection;
 import data.common.sql.SqlProperties;
@@ -59,8 +60,7 @@ public class AlumnadoDAO {
             // Ejecutar la consulta de selección
             ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT
 
-            // Mostrar los resultados
-            System.out.println("Planes de Convalidación Disponibles:");
+       
             while (resultSet.next()) {
                 // Obtener los valores de cada columna en el ResultSet
                 int id = resultSet.getInt("ID");
@@ -76,8 +76,80 @@ public class AlumnadoDAO {
                 // Añadir el plan a la lista
                 planes.add(plan);
 
-                // Imprimir cada plan de convalidación (si lo deseas)
-                System.out.println(plan);  // Usando el método toString() de PlanesDeConvalidacionDTO
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Imprimir el error si ocurre una excepción
+        }
+
+        // Retornar la lista de planes
+        return planes;
+    }
+    
+    public static List<Plan_AsignaturasDTO> viewPlansAsignaturas(int id_P) {
+        // Cadena de conexión, consulta SQL, y conexión a la base de datos
+        String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlansAsignaturas");
+        List<Plan_AsignaturasDTO> planes = new ArrayList<>();
+
+        // Abrir la conexión y ejecutar la consulta
+        try (Connection connection = new DBConnection().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
+
+            // Establecer los parámetros en la consulta (si es necesario)
+            pstmt.setInt(1, id_P);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
+
+            // Ejecutar la consulta de selección
+            ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT
+
+            // Mostrar los resultados
+            while (resultSet.next()) {
+                // Obtener los valores de cada columna en el ResultSet
+            	
+                int id_A = resultSet.getInt("id_asignatura");
+                String tipo_A = resultSet.getString("tipo_asignatura");
+
+
+                // Crear un nuevo objeto PlanesDeConvalidacionDTO
+                Plan_AsignaturasDTO plan = new Plan_AsignaturasDTO(id_P, id_A, tipo_A);
+
+                // Añadir el plan a la lista
+                planes.add(plan);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Imprimir el error si ocurre una excepción
+        }
+
+        // Retornar la lista de planes
+        return planes;
+    }
+    
+    public static List<AsignaturaDTO> viewAsignaturas(int id) {
+        // Cadena de conexión, consulta SQL, y conexión a la base de datos
+        String sqlQuery = SqlProperties.getClave("sql.properties", "viewAsignaturas");
+        List<AsignaturaDTO> planes = new ArrayList<>();
+
+        // Abrir la conexión y ejecutar la consulta
+        try (Connection connection = new DBConnection().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
+
+            // Establecer los parámetros en la consulta (si es necesario)
+            pstmt.setInt(1, id);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
+
+            // Ejecutar la consulta de selección
+            ResultSet resultSet = pstmt.executeQuery();  // executeQuery() es usado para consultas SELECT
+
+
+            while (resultSet.next()) {
+
+                String nombreAs = resultSet.getString("nombreAsignatura");
+
+                // Crear un nuevo objeto PlanesDeConvalidacionDTO
+                AsignaturaDTO plan = new AsignaturaDTO(id, nombreAs);
+
+                // Añadir el plan a la lista
+                planes.add(plan);
             }
 
         } catch (SQLException e) {
