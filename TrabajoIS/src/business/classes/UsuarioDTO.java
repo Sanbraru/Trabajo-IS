@@ -71,4 +71,15 @@ public class UsuarioDTO {
     public void setidPlan(int idPlan) {
         this.idPlan = idPlan;
     }
+
+    //toString
+    @Override
+    public String toString()
+    {
+        return "Usuario [Correo: " + correo +
+               ", Contraseña: " + contrasena +
+               ", Nombre: " + nombre +
+               ", Apellidos: " + apellidos +
+               ", DNI: " + dni + "]"; 
+    }
 }

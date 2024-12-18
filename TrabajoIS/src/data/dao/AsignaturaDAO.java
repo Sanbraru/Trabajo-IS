@@ -131,4 +131,42 @@ public class AsignaturaDAO
         return aux;
     }
 
+    public static Boolean asignAsigPlan(Plan_AsignaturasDTO aux)
+    {
+
+        try
+        {
+            
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection();
+            String cola = SqlProperties.getClave("sqlPlan-Asignatura.properties", "asignAsignatura");
+
+            PreparedStatement pstmt = connection.prepareStatement(cola);
+            pstmt.setInt(3, aux.getIdAsignatura());
+
+            pstmt.setInt(1, aux.getIdPlan());
+            pstmt.setString(2, aux.getTipoAsignatura());
+            
+            int rowsAffected = pstmt.executeUpdate(); // Ejecuta la inserción
+    
+            if (rowsAffected > 0) {
+                return true; // La pista fue creada exitosamente
+            }
+
+            pstmt.close(); // Cierra el PreparedStatement
+            dbConnection.closeConnection(); // Cierra la conexión
+
+    
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+			e.printStackTrace();
+        }
+
+        return false;
+
+
+    }
+
 }

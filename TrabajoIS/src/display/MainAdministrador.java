@@ -36,8 +36,7 @@ public class MainAdministrador
                     System.out.println("Introduzca el ID del Plan: ");
                     int idPlan = scanner.nextInt();
 
-                    // ArrayList<int> listaApuntados = GestorAdministradores.buscarApuntados(idPlan);
-
+                    ArrayList<UsuarioDTO> Usuarios ;
                     
                     break;
                 case 2:
@@ -58,65 +57,58 @@ public class MainAdministrador
                     int anioAcademico = scanner.nextInt();
                     scanner.nextLine(); // Limpiar buffer
 
-
-                    System.out.println("Asingaturas de Origen: ");
-                    System.out.println("Estas son las asignaturas existentes: ");
-
-                    ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
-                    
-                    for(AsignaturaDTO asignatura : listaAsig)
-                    {
-                        System.out.println(asignatura.toString());
-                    }
-
-
-                    System.out.println("Asingaturas de Origen: ");
-                    AsignaturaDTO asignatura = new AsignaturaDTO();
-                    scanner.nextLine(); // Limpiar buffer
-                    while((scanner.nextLine()) != "siguiente")
-                    {
-                        System.out.println("Introduzca el ID de la asignatura(O 'siguiente' si quiere terminar): ");
-                        int idAsignatura = scanner.nextInt();
-                        if((asignatura = GestorAdministradores.buscarAsignatura(idAsignatura)) != null)
-                        {
-                            listaAsignaturasOrigen.add(asignatura);
-                        }
-                        else
-                        {
-                            System.out.println("Error al buscar la asignatura.");
-
-                        }
-                        scanner.nextLine(); // Limpiar buffer
-                    }
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.println("Asingaturas de Destino(Escriba 'siguiente' cuando haya terminado): ");
-                    ArrayList<AsignaturaDTO> listaAsignaturasDestino = new ArrayList<>();
-                    while((scanner.nextLine()) != "siguiente")
-                    {
-                        System.out.println("Introduzca el ID de la asignatura(O 'siguiente' si quiere terminar): ");
-                        int idAsignatura = scanner.nextInt();
-                        if((asignatura = GestorAdministradores.buscarAsignatura(idAsignatura)) != null)
-                        {
-                            listaAsignaturasDestino.add(asignatura);
-                        }
-                        else
-                        {
-                            System.out.println("Error al buscar la asignatura.");
-
-                        }
-                    }
-
-                    PlanesDeConvalidacionDTO nuevoPlan = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, listaAsignaturasOrigen, listaAsignaturasDestino, true, anioAcademico);
+                    PlanesDeConvalidacionDTO nuevoPlan = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, true, anioAcademico);
 
                     if(GestorAdministradores.insertarPlan(nuevoPlan))
                     {
-                        System.out.println("Plan de Convalidacion insertado con éxito.");
+                        System.out.println("Plan Insertado con exito");
                     }
                     else
+
                     {
-                        System.out.println("Error al crear el nuevo Plan de Convalidacion.");
+                        System.out.println("Error al insertar el plan");
                     }
 
+
+                    System.out.println("Asingaturas de Origen y Destino: ");
+                    System.out.println("Estas son las asignaturas existentes: ");
+
+                    ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
+                    while(scanner.nextLine() != "siguiente")
+                    {
+                    
+                        for(AsignaturaDTO asignatura : listaAsig)
+                        {
+                            System.out.println(asignatura.toString());
+                        }
+                        System.out.println("Elija una(O escriba un numero igual o menor que '0' para salir): ");
+                        int idAsignatura = scanner.nextInt();
+
+                        System.out.println("Ahora elija si quiere ponerla de Origen o de Destino(true = Origen | false = Destino): ");
+                        Boolean elecTipo = scanner.nextBoolean();
+                        String tipo = (elecTipo ? "Origen" : "Destino");
+
+                        if(idAsignatura > 0)
+                        {
+                            Plan_AsignaturasDTO aux = new Plan_AsignaturasDTO(idPlan, idAsignatura, tipo);
+
+                            if(!GestorAdministradores.asignarAsignaturaAPlan(aux))
+                            {
+                                System.out.println("Asignatura añadida con exito.");
+
+                            }
+                            else
+                            {
+
+                                System.out.println("Error al asignar asignatura a plan.");
+                                break;
+                                
+                            }
+                        }
+                        
+
+                    }
+                    scanner.nextLine(); // Limpiar buffer
                     break;
                 case 3:
                 System.out.println("Accediendo al historial de los planes...");

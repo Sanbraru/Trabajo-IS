@@ -10,19 +10,19 @@ import data.dao.AsignaturaDAO;
 public class GestorAdministradores
 {
 
-    public static ArrayList<UsuarioDTO> buscarApuntados(int id)
-    {
-        ArrayList<UsuarioDTO> listaApuntados = null;
+    // public static ArrayList<UsuarioDTO> buscarApuntados(int id)
+    // {
+    //     ArrayList<UsuarioDTO> listaApuntados = null;
 
-        // if((listaApuntados = PlanesDeConvalidacionDAO.requestApuntados(id)) != null)
-        // {
+    //     // if((listaApuntados = PlanesDeConvalidacionDAO.requestApuntados(id)) != null)
+    //     // {
 
-        //     return listaApuntados;
+    //     //     return listaApuntados;
 
-        // }
+    //     // }
 
-        return listaApuntados;
-    }
+    //     return listaApuntados;
+    // }
 
     public static boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
     {
@@ -44,52 +44,44 @@ public class GestorAdministradores
         {
             return false;
         }
-        for(AsignaturaDTO Asignatura : nuevoPlan.getAsignaturasOrigen())
-        {
-            if(!PlanesDeConvalidacionDAO.insertAsignaturaPlanOrigen(Asignatura))
-            {
-                return false;
-            }
-        }
-        for(AsignaturaDTO Asignatura : nuevoPlan.getAsignaturasDestino())
-        {
-            if(!PlanesDeConvalidacionDAO.insertAsignaturaPlanDestino(Asignatura))
-            {
-                return false;
-            }
-        }
-
-        
+                
         return true;
     }
     
-    public static boolean insertarAsignatura(AsignaturaDTO n)
-    {
-        if(!AsignaturaDAO.insertAsignatura(n))
-        {
-            return false;
-        }
-        return true;
-    }
-    public static AsignaturaDTO buscarAsignatura(int id)
-    {
-        return AsignaturaDAO.buscarPorID(id);
-    }
+    // public static boolean insertarAsignatura(AsignaturaDTO n)
+    // {
+    //     if(!AsignaturaDAO.insertAsignatura(n))
+    //     {
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    // public static AsignaturaDTO buscarAsignatura(int id)
+    // {
+    //     return AsignaturaDAO.buscarPorID(id);
+    // }
 
     public static ArrayList<AsignaturaDTO> obtenerAsignaturas()
     {
         return AsignaturaDAO.requestAll();
     }
 
-    public static ArrayList<PlanesDeConvalidacionDTO> obtenerPlanes();
+    public static Boolean asignarAsignaturaAPlan(Plan_AsignaturasDTO nueva)
     {
-        ArrayList<PlanesDeConvalidacionDTO> listaPlanes = PlanesDeConvalidacionDAO.requestPlanes();
 
-        for(PlanesDeConvalidacionDTO plan : listaPlanes)
-        {
-            plan.setAsignaturasOrigen(AsignaturaDAO.buscarPorIDPlan(plan.getId()));
-        }
+        return AsignaturaDAO.asignAsigPlan(nueva);
 
-        return listaPlanes;
     }
+
+    // public static ArrayList<PlanesDeConvalidacionDTO> obtenerPlanes();
+    // {
+    //     ArrayList<PlanesDeConvalidacionDTO> listaPlanes = PlanesDeConvalidacionDAO.requestPlanes();
+
+    //     for(PlanesDeConvalidacionDTO plan : listaPlanes)
+    //     {
+    //         plan.setAsignaturasOrigen(AsignaturaDAO.buscarPorIDPlan(plan.getId()));
+    //     }
+
+    //     return listaPlanes;
+    // }
 }
