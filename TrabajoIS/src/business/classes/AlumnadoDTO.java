@@ -15,12 +15,12 @@ public class AlumnadoDTO extends UsuarioDTO
     public AlumnadoDTO() {}
 
     // Constructor parametrizado
-    public AlumnadoDTO(String correo, String contrasena, String nombre, String apellidos, String dni,
+    public AlumnadoDTO(String correo, String contrasena, String nombre, String apellidos, String dni, int idPlan,
                     int telefono, int anioAcademico, String centroOrigen,
                     boolean solicitaAyuda, boolean inscrito, boolean realizado) 
     {
 
-        super(correo, contrasena, nombre, apellidos, dni); // Llamada al constructor de la clase padre
+        super(correo, contrasena, nombre, apellidos, dni, idPlan); // Llamada al constructor de la clase padre
         this.telefono = telefono;
         this.anioAcademico = anioAcademico;
         this.centroOrigen = centroOrigen;

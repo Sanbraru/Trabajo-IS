@@ -6,6 +6,7 @@ public class UsuarioDTO {
     private String nombre;
     private String apellidos;
     private String dni;
+    private int idPlan;
 
     // Constructor vacío
     public UsuarioDTO() {
@@ -13,12 +14,13 @@ public class UsuarioDTO {
     }
 
     // Constructor parametrizado
-    public UsuarioDTO(String correo, String contrasena, String nombre, String apellidos, String dni) {
+    public UsuarioDTO(String correo, String contrasena, String nombre, String apellidos, String dni, int idPlan) {
         this.correo = correo;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
+        this.idPlan = idPlan;
     }
 
     // Getters y Setters
@@ -60,5 +62,13 @@ public class UsuarioDTO {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+    
+    public int getidPlan() {
+        return idPlan;
+    }
+
+    public void setidPlan(int idPlan) {
+        this.idPlan = idPlan;
     }
 }

@@ -86,7 +86,9 @@ public class Main
                     System.out.print("Ingrese sus dni: ");
                     String dni  = scanner.nextLine();
                     
-                    UsuarioDTO nuevoUsuario = new UsuarioDTO(correo, contrasena, nombre, apellidos, dni);
+                    int idPlan = -1;
+                    
+                    UsuarioDTO nuevoUsuario = new UsuarioDTO(correo, contrasena, nombre, apellidos, dni, idPlan);
                     
                     System.out.print("¿Usted es un Alumno o un Profesor? (a/p).");
                     
@@ -120,6 +122,7 @@ public class Main
                     	    nombre, 
                     	    apellidos, 
                     	    dni, 
+                    	    idPlan,
                     	    telefono, 
                     	    anoAcademico, 
                     	    centroorigen, 
@@ -159,6 +162,7 @@ public class Main
                     	    nombre, 
                     	    apellidos, 
                     	    dni, 
+                    	    idPlan,
                     	    telefono, 
                     	    centroorigen, 
                     	    solicitaayuda == 0,   // Convertir 1/0 a booleano

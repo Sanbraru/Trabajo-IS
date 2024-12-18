@@ -70,6 +70,7 @@ public class UsuarioDAO {
             pstmt.setString(3, nuevoUsuario.getNombre());
             pstmt.setString(4, nuevoUsuario.getApellidos());
             pstmt.setString(5, nuevoUsuario.getDni());
+            pstmt.setInt(6, -1);
 
             // Ejecutar la consulta de inserción
             int filasAfectadas = pstmt.executeUpdate();  // executeUpdate() se usa para operaciones de modificación (INSERT, UPDATE, DELETE)
