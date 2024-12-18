@@ -9,7 +9,7 @@ public class AdministradorDTO extends UsuarioDTO
 
     public AdministradorDTO() {}
 
-    public AdministradorDTO(String correo, String contrasena, String nombre, String apellidos, String dni, int idPlan,boolean esAdmin)
+    public AdministradorDTO(String correo, String contrasena, String nombre, String apellidos, String dni, boolean esAdmin, int idPlan)
     {
         super(correo, contrasena, nombre, apellidos, dni, idPlan);
         this.esAdmin = esAdmin;

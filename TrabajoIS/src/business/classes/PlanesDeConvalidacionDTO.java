@@ -9,8 +9,8 @@ public class PlanesDeConvalidacionDTO
     private boolean tipoUsuario;
     private int tiempoPlan;
     private String centroDestino;
-    private List<AsignaturaDTO> asignaturasOrigen; //A revisar
-    private List<AsignaturaDTO> asignaturasDestino;//A revisar
+    private ArrayList<AsignaturaDTO> asignaturasOrigen; //A revisar
+    private ArrayList<AsignaturaDTO> asignaturasDestino;//A revisar
     private boolean vigente;
     private int anioAcademico;
     private List<UsuarioDTO> listaInscritos;//A revisar
@@ -20,7 +20,7 @@ public class PlanesDeConvalidacionDTO
 
     // Constructor parametrizado
     public PlanesDeConvalidacionDTO(int id, boolean tipoUsuario, int tiempoPlan, String centroDestino,
-                                List<AsignaturaDTO> asignaturasOrigen, List<AsignaturaDTO> asignaturasDestino,
+                                ArrayList<AsignaturaDTO> asignaturasOrigen, ArrayList<AsignaturaDTO> asignaturasDestino,
                                 boolean vigente, int anioAcademico) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
@@ -70,7 +70,7 @@ public class PlanesDeConvalidacionDTO
         return asignaturasOrigen;
     }
 
-    public void setAsignaturasOrigen(List<AsignaturaDTO> asignaturasOrigen) {
+    public void setAsignaturasOrigen(ArrayList<AsignaturaDTO> asignaturasOrigen) {
         this.asignaturasOrigen = asignaturasOrigen;
     }
 
@@ -78,7 +78,7 @@ public class PlanesDeConvalidacionDTO
         return asignaturasDestino;
     }
 
-    public void setAsignaturasDestino(List<AsignaturaDTO> asignaturasDestino) {
+    public void setAsignaturasDestino(ArrayList<AsignaturaDTO> asignaturasDestino) {
         this.asignaturasDestino = asignaturasDestino;
     }
 

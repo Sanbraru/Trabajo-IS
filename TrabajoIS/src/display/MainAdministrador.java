@@ -3,18 +3,15 @@ package display;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.sound.sampled.BooleanControl;
 
 import business.classes.*;
 import business.gestores.*;
-import data.dao.AsignaturaDAO;
 
 
 public class MainAdministrador 
 {
     public static void mostrarMenuAdministrador(Scanner scanner) {
 
-        AdministradorDTO adminDTO = new AdministradorDTO();
         
         boolean salir = false;
 
@@ -39,7 +36,7 @@ public class MainAdministrador
                     System.out.println("Introduzca el ID del Plan: ");
                     int idPlan = scanner.nextInt();
 
-                    ArrayList<UsuarioDTO> listaApuntados = GestorAdministradores.buscarApuntados(idPlan);
+                    //ArrayList<UsuarioDTO> listaApuntados = GestorAdministradores.buscarApuntados(idPlan);
 
                     
                     break;
@@ -109,7 +106,8 @@ public class MainAdministrador
 
                     break;
                 case 3:
-                System.out.println("Accediendo a opciones...");
+                System.out.println("Accediendo al historial de los planes...");
+                
                 break;
                 case 4:
                 System.out.println("Accediendo a opciones...");

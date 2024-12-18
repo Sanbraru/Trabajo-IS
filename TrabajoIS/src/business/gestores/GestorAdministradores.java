@@ -14,18 +14,19 @@ public class GestorAdministradores
     {
         ArrayList<UsuarioDTO> listaApuntados = null;
 
-        if((listaApuntados = PlanesDeConvalidacionDAO.requestApuntados(id)) != null)
-        {
+        // if((listaApuntados = PlanesDeConvalidacionDAO.requestApuntados(id)) != null)
+        // {
 
-            return listaApuntados;
+        //     return listaApuntados;
 
-        }
+        // }
 
         return listaApuntados;
     }
 
     public static boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
     {
+       
 
         if(nuevoPlan.getTiempoPlan() <=0 || nuevoPlan.getTiempoPlan() < 10 )
         {
@@ -42,6 +43,20 @@ public class GestorAdministradores
         else if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
         {
             return false;
+        }
+        for(AsignaturaDTO Asignatura : nuevoPlan.getAsignaturasOrigen())
+        {
+            if(!PlanesDeConvalidacionDAO.insertAsignaturaPlanOrigen(Asignatura))
+            {
+                return false;
+            }
+        }
+        for(AsignaturaDTO Asignatura : nuevoPlan.getAsignaturasDestino())
+        {
+            if(!PlanesDeConvalidacionDAO.insertAsignaturaPlanDestino(Asignatura))
+            {
+                return false;
+            }
         }
 
         
