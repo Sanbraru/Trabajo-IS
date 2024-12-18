@@ -1,6 +1,9 @@
 package business.gestores;
 
+import java.util.List;
+
 import business.classes.AlumnadoDTO;
+import business.classes.PlanesDeConvalidacionDTO;
 import data.dao.AlumnadoDAO;
 import data.dao.ProfesoradoDAO;
 
@@ -11,9 +14,9 @@ public class GestorAlumnado
     	return AlumnadoDAO.addStudent(nuevoUsuario, idUsuario);
     }
 
-	public static void mostrarPlanes() {
+	public static List<PlanesDeConvalidacionDTO> mostrarPlanes() {
 		
-		AlumnadoDAO.viewPlans();
+		return AlumnadoDAO.viewPlans();
 		
 	}
 }

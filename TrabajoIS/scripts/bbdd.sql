@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Servidor: oraclepr.uco.es
--- Tiempo de generación: 18-12-2024 a las 11:33:52
+-- Tiempo de generación: 18-12-2024 a las 18:50:45
 -- Versión del servidor: 5.1.73
 -- Versión de PHP: 5.3.3
 -- 
@@ -12,7 +12,11 @@
 
 -- --------------------------------------------------------
 
- CREATE TABLE `Usuario` (
+-- 
+-- Estructura de tabla para la tabla `Usuario`
+-- 
+
+CREATE TABLE `Usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `Correo` varchar(255) NOT NULL,
   `Contrasena` varchar(255) NOT NULL,
@@ -22,14 +26,12 @@
   `IdPlan` int(11) NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `Correo` (`Correo`),
-  UNIQUE KEY `DNI` (`DNI`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `DNI` (`DNI`),
+  KEY `FK_Planes_Usuario` (`IdPlan`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
 
 -- 
--- Volcar la base de datos para la tabla `Usuario`
--- 
-
-
 -- Estructura de tabla para la tabla `Administrador`
 -- 
 
@@ -42,6 +44,8 @@ CREATE TABLE `Administrador` (
 -- 
 -- Volcar la base de datos para la tabla `Administrador`
 -- 
+
+INSERT INTO `Administrador` VALUES (3, 1);
 
 -- --------------------------------------------------------
 
@@ -63,6 +67,7 @@ CREATE TABLE `Alumno` (
 -- Volcar la base de datos para la tabla `Alumno`
 -- 
 
+
 -- --------------------------------------------------------
 
 -- 
@@ -73,11 +78,42 @@ CREATE TABLE `Asignaturas` (
   `idAsignatura` int(11) NOT NULL AUTO_INCREMENT,
   `nombreAsignatura` varchar(255) NOT NULL,
   PRIMARY KEY (`idAsignatura`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- 
 -- Volcar la base de datos para la tabla `Asignaturas`
 -- 
+
+INSERT INTO `Asignaturas` (nombreAsignatura) VALUES ('Matemáticas'), ('Física'), ('Química'), ('Biología');
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `Plan_Asignaturas`
+-- 
+
+CREATE TABLE `Plan_Asignaturas` (
+  `id_plan` int(11) NOT NULL DEFAULT '0',
+  `id_asignatura` int(11) NOT NULL DEFAULT '0',
+  `tipo_asignatura` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_plan`,`id_asignatura`),
+  KEY `id_asignatura` (`id_asignatura`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `Plan_Asignaturas`
+-- 
+
+-- Relacionar asignaturas origen
+INSERT INTO `Plan_Asignaturas` (id_plan, id_asignatura, tipo_asignatura)
+VALUES (1, 1, 'Origen'),
+       (2, 2, 'Origen');
+
+-- Relacionar asignaturas destino
+INSERT INTO `Plan_Asignaturas` (id_plan, id_asignatura, tipo_asignatura)
+VALUES (1, 3, 'Destino'),
+       (2, 4, 'Destino');
+
 
 
 -- --------------------------------------------------------
@@ -91,16 +127,26 @@ CREATE TABLE `PlanesConvalidacion` (
   `TipoUsuario` tinyint(1) DEFAULT NULL,
   `TiempoPlan` int(11) DEFAULT NULL,
   `CentroDestino` varchar(255) DEFAULT NULL,
-  `IdAsignaturasOrigen` int(11) DEFAULT NULL,
-  `IdAsignaturasDestino` int(11) DEFAULT NULL,
   `Vigente` tinyint(1) DEFAULT NULL,
   `AnoAcademico` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- 
 -- Volcar la base de datos para la tabla `PlanesConvalidacion`
 -- 
+
+INSERT INTO `PlanesConvalidacion` (TipoUsuario, TiempoPlan, CentroDestino, Vigente, AnoAcademico)
+VALUES (1, 2, 'Centro Universitario B', 1, 2);
+
+INSERT INTO `PlanesConvalidacion` (TipoUsuario, TiempoPlan, CentroDestino, Vigente, AnoAcademico)
+VALUES (1, 2, 'Centro Universitario B', 1, 3);
+
+INSERT INTO `PlanesConvalidacion` (TipoUsuario, TiempoPlan, CentroDestino, Vigente, AnoAcademico)
+VALUES (0, 2, 'Centro Universitario B', 1, 4);
+
+INSERT INTO `PlanesConvalidacion` (TipoUsuario, TiempoPlan, CentroDestino, Vigente, AnoAcademico)
+VALUES (0, 2, 'Centro Universitario B', 1, 4);
 
 
 -- --------------------------------------------------------
@@ -121,13 +167,16 @@ CREATE TABLE `Profesorado` (
 -- 
 -- Volcar la base de datos para la tabla `Profesorado`
 -- 
+
+
 -- --------------------------------------------------------
 
+
 -- 
--- Estructura de tabla para la tabla `Usuario`
+-- Volcar la base de datos para la tabla `Usuario`
 -- 
 
-
+INSERT INTO `Usuario` VALUES (3, 'admin@ejemplo.com', 'admin1234', 'Admin', 'Ejemplo', '12345678Z', 2);
 
 -- 
 -- Filtros para las tablas descargadas (dump)
@@ -145,21 +194,16 @@ ALTER TABLE `Administrador`
 ALTER TABLE `Alumno`
   ADD CONSTRAINT `Alumno_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
--- 
--- Filtros para la tabla `PlanesConvalidacion`
--- 
-ALTER TABLE `Usuario`
-  ADD CONSTRAINT `FK_Planes_Usuario` FOREIGN KEY (`IdPlan`) REFERENCES `PlanesConvalidacion` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- 
 -- Filtros para la tabla `Profesorado`
 -- 
 ALTER TABLE `Profesorado`
   ADD CONSTRAINT `Profesorado_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-  
-  ALTER TABLE `PlanesConvalidacion`
-  ADD CONSTRAINT `FK_ASIGNATURASORIGEN` FOREIGN KEY (`IdAsignaturasOrigen`) REFERENCES `Asignaturas` (`idAsignatura`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- 
+-- Filtros para la tabla `Usuario`
+-- 
+ALTER TABLE `Usuario`
+  ADD CONSTRAINT `FK_Planes_Usuario` FOREIGN KEY (`IdPlan`) REFERENCES `PlanesConvalidacion` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-  ALTER TABLE `PlanesConvalidacion`
-  ADD CONSTRAINT `FK_ASIGNATURASDESTINO` FOREIGN KEY (`IdAsignaturasDestino`) REFERENCES `Asignaturas` (`idAsignatura`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -9,8 +9,6 @@ public class PlanesDeConvalidacionDTO
     private boolean tipoUsuario;
     private int tiempoPlan;
     private String centroDestino;
-    private ArrayList<AsignaturaDTO> asignaturasOrigen; //A revisar
-    private ArrayList<AsignaturaDTO> asignaturasDestino;//A revisar
     private boolean vigente;
     private int anioAcademico;
     private List<UsuarioDTO> listaInscritos;//A revisar
@@ -20,7 +18,6 @@ public class PlanesDeConvalidacionDTO
 
     // Constructor parametrizado
     public PlanesDeConvalidacionDTO(int id, boolean tipoUsuario, int tiempoPlan, String centroDestino,
-                                ArrayList<AsignaturaDTO> asignaturasOrigen, ArrayList<AsignaturaDTO> asignaturasDestino,
                                 boolean vigente, int anioAcademico) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
@@ -66,22 +63,6 @@ public class PlanesDeConvalidacionDTO
         this.centroDestino = centroDestino;
     }
 
-    public List<AsignaturaDTO> getAsignaturasOrigen() {
-        return asignaturasOrigen;
-    }
-
-    public void setAsignaturasOrigen(ArrayList<AsignaturaDTO> asignaturasOrigen) {
-        this.asignaturasOrigen = asignaturasOrigen;
-    }
-
-    public List<AsignaturaDTO> getAsignaturasDestino() {
-        return asignaturasDestino;
-    }
-
-    public void setAsignaturasDestino(ArrayList<AsignaturaDTO> asignaturasDestino) {
-        this.asignaturasDestino = asignaturasDestino;
-    }
-
     public boolean isVigente() {
         return vigente;
     }
@@ -114,8 +95,6 @@ public class PlanesDeConvalidacionDTO
                ", Destinado a: " + (tipoUsuario ? "Profesores" : "Alumnos") +
                ", Duracion: " + tiempoPlan +
                ", Centro de Destino: " + centroDestino +
-               ", Asignaturas de Origen: " + asignaturasOrigen  + 
-               ", Asignaturas de Destino: " + asignaturasDestino + 
                ", Estado de vigencia: " + (vigente ? "Vigente" : "No vigente") + 
                ", Año academico: " + anioAcademico + 
                ", Destinado a: " + listaInscritos + "]"; 

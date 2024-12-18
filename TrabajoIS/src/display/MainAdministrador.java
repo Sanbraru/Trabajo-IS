@@ -53,10 +53,10 @@ public class MainAdministrador
                     scanner.nextLine(); // Limpiar buffer
                     System.out.println("Centro de Destino: ");
                     String centroDestino = scanner.nextLine();
-                    scanner.nextLine(); // Limpiar buffer
                     System.out.println("Asingaturas de Origen(Escriba 'siguiente' cuando haya terminado): ");
                     ArrayList<AsignaturaDTO> listaAsignaturasOrigen = new ArrayList<>();
                     AsignaturaDTO asignatura = new AsignaturaDTO();
+                    scanner.nextLine(); // Limpiar buffer
                     while((scanner.nextLine()) != "siguiente")
                     {
                         System.out.println("Introduzca el ID de la asignatura(O 'siguiente' si quiere terminar): ");
@@ -70,6 +70,7 @@ public class MainAdministrador
                             System.out.println("Error al buscar la asignatura.");
 
                         }
+                        scanner.nextLine(); // Limpiar buffer
                     }
                     scanner.nextLine(); // Limpiar buffer
                     System.out.println("Asingaturas de Destino(Escriba 'siguiente' cuando haya terminado): ");

@@ -1,9 +1,12 @@
 package display;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import business.gestores.GestorAlumnado;
 import business.gestores.GestorProfesorado;
+import business.classes.*;
 
 public class MainAlumnado 
 {
@@ -24,7 +27,9 @@ public class MainAlumnado
                 case 1:
                     System.out.println("Estos son todos los Planes de Convalidación disponibles.");
                     
-                    GestorAlumnado.mostrarPlanes();
+                    List<PlanesDeConvalidacionDTO> Planes = new ArrayList<>();
+                    		
+                    Planes = GestorAlumnado.mostrarPlanes();
                     
                     break;
                 case 2:

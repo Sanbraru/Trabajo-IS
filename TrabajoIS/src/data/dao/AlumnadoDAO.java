@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import business.classes.AlumnadoDTO;
+import business.classes.AsignaturaDTO;
+import business.classes.PlanesDeConvalidacionDTO;
 import data.common.conection.DBConnection;
 import data.common.sql.SqlProperties;
 
@@ -40,14 +44,15 @@ public class AlumnadoDAO {
         return exito;  // Devolver true si la inserción fue exitosa, false en caso contrario
     }
 
-    public static void viewPlans() {
+    public static List<PlanesDeConvalidacionDTO> viewPlans() {
         // Cadena de conexión, consulta SQL, y conexión a la base de datos
         String sqlQuery = SqlProperties.getClave("sql.properties", "viewPlansStudents");
-        
+        List<PlanesDeConvalidacionDTO> planes = new ArrayList<>();
+
         // Abrir la conexión y ejecutar la consulta
         try (Connection connection = new DBConnection().getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sqlQuery)) {
-            
+
             // Establecer los parámetros en la consulta (si es necesario)
             pstmt.setInt(1, 1);  // Aquí deberías modificar el valor según lo que necesites para tu consulta
 
@@ -57,25 +62,30 @@ public class AlumnadoDAO {
             // Mostrar los resultados
             System.out.println("Planes de Convalidación Disponibles:");
             while (resultSet.next()) {
+                // Obtener los valores de cada columna en el ResultSet
                 int id = resultSet.getInt("ID");
-                int tipoUsuario = resultSet.getInt("TipoUsuario");
+                boolean tipoUsuario = resultSet.getBoolean("TipoUsuario");
                 int tiempoPlan = resultSet.getInt("TiempoPlan");
                 String centroDestino = resultSet.getString("CentroDestino");
-                int asignaturaOrigen = resultSet.getInt("IdAsignaturasOrigen");
-                int asignaturaDestino = resultSet.getInt("IdAsignaturasDestino");
                 boolean vigente = resultSet.getBoolean("Vigente");
                 int anoAcademico = resultSet.getInt("AnoAcademico");
-                
-                // Mostrar cada plan de convalidación
-                System.out.println("ID: " + id + ", Tipo Usuario: " + tipoUsuario + ", Tiempo Plan: " + tiempoPlan +
-                        ", Centro Destino: " + centroDestino + ", Asignatura Origen: " + asignaturaOrigen +
-                        ", Asignatura Destino: " + asignaturaDestino + ", Vigente: " + vigente +
-                        ", Año Académico: " + anoAcademico);
+
+                // Crear un nuevo objeto PlanesDeConvalidacionDTO
+                PlanesDeConvalidacionDTO plan = new PlanesDeConvalidacionDTO(id, tipoUsuario, tiempoPlan, centroDestino, vigente, anoAcademico);
+
+                // Añadir el plan a la lista
+                planes.add(plan);
+
+                // Imprimir cada plan de convalidación (si lo deseas)
+                System.out.println(plan);  // Usando el método toString() de PlanesDeConvalidacionDTO
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();  // Imprimir el error si ocurre una excepción
         }
+
+        // Retornar la lista de planes
+        return planes;
     }
 }
 
