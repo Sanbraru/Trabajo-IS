@@ -2,6 +2,9 @@ package display;
 
 import java.util.Scanner;
 
+import business.gestores.GestorAlumnado;
+import business.gestores.GestorProfesorado;
+
 public class MainAlumnado 
 {
     public static void mostrarMenuAlumnado(Scanner scanner) {
@@ -20,6 +23,9 @@ public class MainAlumnado
             switch (opcion) {
                 case 1:
                     System.out.println("Estos son todos los Planes de Convalidación disponibles.");
+                    
+                    GestorAlumnado.mostrarPlanes();
+                    
                     break;
                 case 2:
                     System.out.println("Accediendo a opciones...");

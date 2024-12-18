@@ -86,7 +86,7 @@ public class Main
                     System.out.print("Ingrese sus dni: ");
                     String dni  = scanner.nextLine();
                     
-                    int idPlan = -1;
+                    int idPlan = 0;
                     
                     UsuarioDTO nuevoUsuario = new UsuarioDTO(correo, contrasena, nombre, apellidos, dni, idPlan);
                     
@@ -112,7 +112,6 @@ public class Main
                     	String centroorigen = scanner.nextLine();
                     	
                     	int solicitaayuda = 0;
-                    	int inscrito = 0;
                     	int realizado = 0;
                
                     	// Crear el objeto AlumnadoDTO con los datos recogidos
@@ -127,7 +126,6 @@ public class Main
                     	    anoAcademico, 
                     	    centroorigen, 
                     	    solicitaayuda == 0,   // Convertir 1/0 a booleano
-                    	    inscrito == 0,  // Puede pedir otro dato si se requiere para 'inscrito'
                     	    realizado == 0 // Convertir 1/0 a booleano
                     	);
 

@@ -9,5 +9,10 @@ public class GestorProfesorado
     {
     	return ProfesoradoDAO.addTeacher(nuevoUsuario, idUsuario);
     }
+
+	public static void mostrarPlanes() 
+	{
+		ProfesoradoDAO.viewPlans();
+	}
 }
 

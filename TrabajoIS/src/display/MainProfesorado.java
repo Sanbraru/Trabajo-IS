@@ -2,6 +2,8 @@ package display;
 
 import java.util.Scanner;
 
+import business.gestores.GestorProfesorado;
+
 public class MainProfesorado
 {
     public static void mostrarMenuProfesorado(Scanner scanner) {
@@ -19,7 +21,10 @@ public class MainProfesorado
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Mostrando perfil del usuario...");
+                    System.out.println("Estos son todos los Planes de Convalidación disponibles.");
+                    
+                    GestorProfesorado.mostrarPlanes();
+                    
                     break;
                 case 2:
                     System.out.println("Accediendo a opciones...");
