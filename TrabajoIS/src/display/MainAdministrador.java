@@ -108,7 +108,6 @@ public class MainAdministrador
                         
 
                     }
-                    scanner.nextLine(); // Limpiar buffer
                     break;
                 case 3:
                 System.out.println("Accediendo al historial de los planes...");
@@ -125,7 +124,32 @@ public class MainAdministrador
 
                 break;
                 case 4:
-                System.out.println("Accediendo a opciones...");
+                System.out.println("Accediendo al historial de los planes...");
+                System.out.println("PLANES DE CONVALIDACION ---");
+
+                planes = GestorAdministradores.obtenerPlanes();
+                for(PlanesDeConvalidacionDTO plan : planes)
+                {
+                    System.out.println(plan.toString());
+                }
+
+                scanner.nextLine(); // Limpiar buffer
+
+                System.out.println("Elija un plan de convalidacion: ");
+                idPlan = scanner.nextInt();
+                if(idPlan > 0)
+                {
+                    if(GestorAdministradores.modificarVigencia(idPlan))
+                    {
+                        System.out.println("Plan dado de baja con exito");
+                    }
+                    else
+                    {
+                        System.out.println("Error al dar de baja el plan");
+
+                    }
+                }
+
                 break;
                 case 5:
 

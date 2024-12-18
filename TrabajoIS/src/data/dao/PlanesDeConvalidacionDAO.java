@@ -169,5 +169,41 @@ public class PlanesDeConvalidacionDAO {
         return listaPlanes;
     }
 
+    public static Boolean setVigente(int ID)
+    {
+
+        Boolean insertado = false;
+
+        try 
+        {
+
+            DBConnection dbConnection = new DBConnection();
+            Connection connection = dbConnection.getConnection();
+            String cola = SqlProperties.getClave("sqlPlanesCONV.properties", "setVigencia");
+            
+            PreparedStatement pstmt = connection.prepareStatement(cola);
+
+
+            pstmt.setInt(1, ID);
+
+            //Con esto compruebas que se ha insertado el nuevo material
+            int rowsAffected = pstmt.executeUpdate();
+            insertado = rowsAffected > 0 && rowsAffected <= 1;
+
+            pstmt.close(); // Cierra el PreparedStatement
+            dbConnection.closeConnection(); // Cierra la conexión
+    
+        }
+        catch (Exception e) 
+        {
+            System.err.println(e);
+			e.printStackTrace();
+        }
+
+
+        return insertado;
+
+    }
+
 }
 

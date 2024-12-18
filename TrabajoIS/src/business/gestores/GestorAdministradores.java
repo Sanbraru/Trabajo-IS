@@ -69,4 +69,9 @@ public class GestorAdministradores
     {
         return PlanesDeConvalidacionDAO.requestPlanes();
     }
+
+    public static Boolean modificarVigencia(int ID)
+    {
+        return PlanesDeConvalidacionDAO.setVigente(ID);
+    }
 }
