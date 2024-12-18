@@ -19,20 +19,7 @@ public class GestorAdministradores
     public static boolean insertarPlan(PlanesDeConvalidacionDTO nuevoPlan)
     {
        
-
-        if(nuevoPlan.getTiempoPlan() <=0 || nuevoPlan.getTiempoPlan() < 10 )
-        {
-            return false;
-        }
-        else if(nuevoPlan.getCentroDestino() == "\0")
-        {
-            return false;
-        }
-        else if(nuevoPlan.getAnioAcademico() < 2024)
-        {
-            return false;
-        }
-        else if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
+        if(!PlanesDeConvalidacionDAO.insertarPlanDAO(nuevoPlan))
         {
             return false;
         }
