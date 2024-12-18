@@ -60,7 +60,6 @@ public class MainAdministrador
                         scanner.nextLine(); // Limpiar buffer
                         System.out.println("Duración del Plan en meses: ");
                         int tiempoPlan = scanner.nextInt();
-                        scanner.nextLine(); // Limpiar buffer
                         System.out.println("Centro de Destino: ");
                         String centroDestino = scanner.nextLine();
                         scanner.nextLine(); // Limpiar buffer
@@ -148,10 +147,10 @@ public class MainAdministrador
                 scanner.nextLine(); // Limpiar buffer
 
                 System.out.println("Elija un plan de convalidacion: ");
-                idPlan = scanner.nextInt();
-                if(idPlan > 0)
+                int id = scanner.nextInt();
+                if(id > 0)
                 {
-                    if(GestorAdministradores.modificarVigencia(idPlan))
+                    if(GestorAdministradores.modificarVigencia(id))
                     {
                         System.out.println("Plan dado de baja con exito");
                     }
