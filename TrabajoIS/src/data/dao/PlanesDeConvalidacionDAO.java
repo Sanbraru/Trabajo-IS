@@ -82,7 +82,7 @@ public class PlanesDeConvalidacionDAO {
 
             while(rs.next())
             {
-                int idPlan = rs.getInt("idPlan");
+                int idPlan = rs.getInt("ID");
                 Boolean tipoUsuario = rs.getBoolean("tipoUsuario");
                 int tiempoPlan = rs.getInt("TiempoPlan");
                 String centroDestino = rs.getString("CentroDestino");
