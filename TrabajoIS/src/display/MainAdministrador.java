@@ -194,11 +194,12 @@ public class MainAdministrador
 
                     if(linksAsignaturas.size() <= 0)
                     {
-                        System.out.println("Este plan no tiene asignaturas asociadas.");
+                        System.out.println("\nEste plan no tiene asignaturas asociadas.");
 
                     }
                     else
                     {
+                    	System.out.println("ASIGNATURAS ASOCIADAS.");
                         ArrayList<AsignaturaDTO> asignaturas = new ArrayList<>();
                         for(Plan_AsignaturasDTO link : linksAsignaturas)
                         {

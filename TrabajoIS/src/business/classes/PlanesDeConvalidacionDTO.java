@@ -89,13 +89,12 @@ public class PlanesDeConvalidacionDTO
     @Override
     public String toString()
     {
-        return "Plan de Convalidacion [Nombre: " + id +
-               ", Destinado a: " + (tipoUsuario ? "Profesores" : "Alumnos") +
-               ", Duracion: " + tiempoPlan +
-               ", Centro de Destino: " + centroDestino +
-               ", Estado de vigencia: " + (vigente ? "Vigente" : "No vigente") + 
-               ", Año academico: " + anioAcademico + 
-               ", Destinado a: " + listaInscritos + "]"; 
+        return "Plan de Convalidacion: \n  [Nombre: " + id +
+               ",\n Destinado a: " + (tipoUsuario ? "Profesores" : "Alumnos") +
+               ",\n Duracion: " + tiempoPlan +
+               ",\n Centro de Destino: " + centroDestino +
+               ",\n Estado de vigencia: " + (vigente ? "Vigente" : "No vigente") + 
+               ",\n Año academico: " + anioAcademico + "]"; 
     }
 
 }

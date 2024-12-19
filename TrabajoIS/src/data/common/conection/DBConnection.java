@@ -31,7 +31,7 @@ public class DBConnection {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = (Connection) DriverManager.getConnection(url, user, password);
-			System.out.println("Database connection successfully opened!");
+			
 		} 
 		catch (SQLException e) {
 			System.err.println("Connection to MySQL has failed!");
@@ -49,7 +49,7 @@ public class DBConnection {
 		try {
 			if(this.connection != null && !this.connection.isClosed()) {
 				this.connection.close();
-				System.out.println("Database connection successfully closed!");
+				
 			}
 		} catch (SQLException e) {
 			System.err.println("Error while trying to close the connection.");
