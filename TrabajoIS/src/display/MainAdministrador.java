@@ -1,6 +1,7 @@
 package display;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -38,9 +39,16 @@ public class MainAdministrador
 
                     ArrayList<UsuarioDTO> Usuarios = GestorAdministradores.obtenerUsuarios(idPlan);
 
-                    for(UsuarioDTO usuario : Usuarios)
+                    if(Usuarios.size() > 0)
                     {
-                        System.out.println(usuario.toString());
+                    	for(UsuarioDTO usuario : Usuarios)
+                        {
+                            System.out.println(usuario.toString());
+                        }
+                    }
+                    else
+                    {
+                    	System.out.println("Este plan actualmente no tiene ningún alumno/profesor.");
                     }
                     
                     break;
@@ -53,20 +61,58 @@ public class MainAdministrador
                         System.out.println("Ese plan ya eiste.");
                     }
                     else
-                    {
-                        scanner.nextLine(); // Limpiar buffer
-                        System.out.println("El plan será para maestros?(true|false): ");
+                    {  
+
+                    	scanner.nextLine(); // Limpiar buffer
+
+                        // Validar tipoUsuario
+                        System.out.println("El plan será para maestros? (true|false): ");
+                        if (!scanner.hasNextBoolean()) {
+                            System.out.println("Entrada inválida. Debe introducir 'true' o 'false'.");
+                            scanner.nextLine(); // Consumir la entrada inválida
+                            break;
+                        }
                         Boolean tipoUsuario = scanner.nextBoolean();
                         scanner.nextLine(); // Limpiar buffer
-                        System.out.println("Duración del Plan en meses: ");
+
+                        // Validar duración del plan
+                        System.out.println("Duración del Plan en meses (entre 3 y 12): ");
+                        if (!scanner.hasNextInt()) {
+                            System.out.println("Entrada inválida. Debe introducir un número entero.");
+                            scanner.nextLine(); // Consumir la entrada inválida
+                            break;
+                        }
                         int tiempoPlan = scanner.nextInt();
-                        System.out.println("Centro de Destino: ");
-                        String centroDestino = scanner.nextLine();
-                        scanner.nextLine(); // Limpiar buffer
-                        System.out.println("Año academico: ");
-                        int anioAcademico = scanner.nextInt();
+                        if (tiempoPlan < 3 || tiempoPlan > 12) {
+                            System.out.println("La duración debe estar entre 3 y 12 meses.");
+                            break;
+                        }
                         scanner.nextLine(); // Limpiar buffer
 
+                        // Validar centro de destino
+                        System.out.println("Centro de Destino: ");
+                        String centroDestino = scanner.nextLine();
+                        if (centroDestino.isEmpty()) {
+                            System.out.println("El Centro de Destino no puede estar vacío.");
+                            break;
+                        }
+
+                        // Validar año académico
+                        System.out.println("Año académico (debe ser 2024 o posterior): ");
+                        if (!scanner.hasNextInt()) {
+                            System.out.println("Entrada inválida. Debe introducir un número entero.");
+                            scanner.nextLine(); // Consumir la entrada inválida
+                            break;
+                        }
+                        int anioAcademico = scanner.nextInt();
+                        if (anioAcademico <= 2024) {
+                            System.out.println("El Año Académico debe ser mayor a 2024.");
+                            break;
+                        }
+
+                        // Si todas las validaciones son correctas, salir del bucle
+                        System.out.println("Datos validados correctamente.");
+                        
                         PlanesDeConvalidacionDTO nuevoPlan = new PlanesDeConvalidacionDTO(idPlan, tipoUsuario, tiempoPlan, centroDestino, true, anioAcademico);
 
                         if(GestorAdministradores.insertarPlan(nuevoPlan))
@@ -82,41 +128,54 @@ public class MainAdministrador
 
                         System.out.println("Asignaturas de Origen y Destino: ");
                         System.out.println("Estas son las asignaturas existentes: ");
-
+                        
+                        
                         ArrayList<AsignaturaDTO> listaAsig = GestorAdministradores.obtenerAsignaturas();
-                        while(scanner.nextLine() != "siguiente")
+
+                        while(true)
                         {
                         
-                            for(AsignaturaDTO asignatura : listaAsig)
+                        	for(AsignaturaDTO asignatura : listaAsig)
                             {                            	
                                 System.out.println(asignatura.toString());
                             }
-                            System.out.println("Elija una(O escriba un numero igual o menor que '0' para salir): ");
-                            int idAsignatura = scanner.nextInt();
+                            
+                        	try {
+                                // Pedir al usuario que elija una asignatura o salir
+                                System.out.println("Elija una asignatura (O escriba un número igual o menor que '0' para salir): ");
+                                int idAsignatura = scanner.nextInt();
+                                scanner.nextLine(); // Consumir el salto de línea pendiente después de nextInt()
 
-                            System.out.println("Ahora elija si quiere ponerla de Origen o de Destino(true = Origen | false = Destino): ");
-                            Boolean elecTipo = scanner.nextBoolean();
-                            String tipo = (elecTipo ? "Origen" : "Destino");
+                                // Salir del bucle si el número es igual o menor a 0
+                                if (idAsignatura <= 0) {
+                                    System.out.println("Saliendo del bucle...");
+                                    break;
+                                }
 
-                            if(idAsignatura > 0)
-                            {
+                                // Pedir al usuario que elija si es de Origen o de Destino
+                                System.out.println("Ahora elija si quiere ponerla de Origen o de Destino (true = Origen | false = Destino): ");
+                                boolean elecTipo = scanner.nextBoolean();
+                                scanner.nextLine(); // Consumir el salto de línea pendiente después de nextBoolean()
+
+                                // Asignar el tipo basado en la elección del usuario
+                                String tipo = (elecTipo ? "Origen" : "Destino");
+
+                                // Crear un objeto Plan_AsignaturasDTO con los datos introducidos
                                 Plan_AsignaturasDTO aux = new Plan_AsignaturasDTO(idPlan, idAsignatura, tipo);
 
-                                if(!GestorAdministradores.asignarAsignaturaAPlan(aux))
-                                {
-                                    System.out.println("Asignatura añadida con exito.");
-
-                                }
-                                else
-                                {
-
+                                // Intentar asignar la asignatura al plan
+                                if (GestorAdministradores.asignarAsignaturaAPlan(aux)) {
+                                    System.out.println("Asignatura añadida con éxito.");
+                                } else {
                                     System.out.println("Error al asignar asignatura a plan.");
-                                    break;
-                                    
+                                    break; // Salir del bucle si ocurre un error
                                 }
+
+                            } catch (InputMismatchException e) {
+                                System.out.println("Entrada inválida. Por favor, introduce los datos correctos.");
+                                scanner.nextLine(); // Consumir el input incorrecto para evitar bloqueos
                             }
                             
-
                         }
                     }
                     break;
@@ -144,7 +203,6 @@ public class MainAdministrador
                     System.out.println(plan.toString());
                 }
 
-                scanner.nextLine(); // Limpiar buffer
 
                 System.out.println("Elija un plan de convalidacion: ");
                 int id = scanner.nextInt();
@@ -174,7 +232,6 @@ public class MainAdministrador
                 }
                 System.out.println("Nombre de la nueva asignatura: ");
                 String nombre = scanner.nextLine();
-                scanner.nextLine(); // Limpiar buffer
 
                 AsignaturaDTO nuevaAsig = new AsignaturaDTO(idAsignatura, nombre);
 

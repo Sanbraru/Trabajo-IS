@@ -131,6 +131,8 @@ public class AsignaturaDAO
     public static Boolean asignAsigPlan(Plan_AsignaturasDTO aux)
     {
 
+    	Boolean insertado = false;
+    	
         try
         {
             
@@ -139,15 +141,15 @@ public class AsignaturaDAO
             String cola = SqlProperties.getClave("sqlPlan-Asignatura.properties", "asignAsignatura");
 
             PreparedStatement pstmt = connection.prepareStatement(cola);
-            pstmt.setInt(3, aux.getIdAsignatura());
 
             pstmt.setInt(1, aux.getIdPlan());
-            pstmt.setString(2, aux.getTipoAsignatura());
+            pstmt.setInt(2, aux.getIdAsignatura());
+            pstmt.setString(3, aux.getTipoAsignatura());
             
             int rowsAffected = pstmt.executeUpdate(); // Ejecuta la inserción
     
             if (rowsAffected > 0) {
-                return true; // La pista fue creada exitosamente
+                insertado =  true; // La pista fue creada exitosamente
             }
 
             pstmt.close(); // Cierra el PreparedStatement
@@ -161,7 +163,7 @@ public class AsignaturaDAO
 			e.printStackTrace();
         }
 
-        return false;
+        return insertado;
 
 
     }
