@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import business.gestores.GestorAlumnado;
-import business.gestores.GestorProfesorado;
 import business.classes.*;
 
 public class MainAlumnado 

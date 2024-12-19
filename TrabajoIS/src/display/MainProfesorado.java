@@ -7,7 +7,6 @@ import java.util.Scanner;
 import business.classes.AsignaturaDTO;
 import business.classes.Plan_AsignaturasDTO;
 import business.classes.PlanesDeConvalidacionDTO;
-import business.gestores.GestorAlumnado;
 import business.gestores.GestorProfesorado;
 
 public class MainProfesorado

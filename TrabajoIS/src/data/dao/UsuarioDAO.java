@@ -3,7 +3,6 @@ package data.dao;
 import java.sql.*;
 import java.util.ArrayList;
 
-import business.classes.AsignaturaDTO;
 import business.classes.UsuarioDTO;
 import data.common.conection.DBConnection;
 import data.common.sql.SqlProperties;

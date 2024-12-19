@@ -3,9 +3,6 @@ package tests;
 // Ejemplo de pruebas de caja negra
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Test;
 
 // Importar dependencias necesarias
@@ -15,11 +12,9 @@ import org.junit.runner.notification.Failure;
 
 import business.classes.AlumnadoDTO;
 import business.classes.AsignaturaDTO;
-import business.classes.PlanesDeConvalidacionDTO;
 import business.classes.ProfesoradoDTO;
 import business.classes.UsuarioDTO;
 import data.dao.AlumnadoDAO;
-import data.dao.PlanesDeConvalidacionDAO;
 import data.dao.UsuarioDAO;
 
 public class BlackBoxTests {

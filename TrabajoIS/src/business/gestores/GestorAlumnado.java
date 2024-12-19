@@ -7,7 +7,6 @@ import business.classes.AsignaturaDTO;
 import business.classes.Plan_AsignaturasDTO;
 import business.classes.PlanesDeConvalidacionDTO;
 import data.dao.AlumnadoDAO;
-import data.dao.ProfesoradoDAO;
 
 public class GestorAlumnado
 {
