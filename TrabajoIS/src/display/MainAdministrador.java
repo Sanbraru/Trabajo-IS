@@ -181,16 +181,46 @@ public class MainAdministrador
                     break;
                 case 3:
                 System.out.println("Accediendo al historial de los planes...");
-                System.out.println("PLANES DE CONVALIDACION ---");
+                System.out.println("PLANES DE CONVALIDACION ------->");
 
                 ArrayList<PlanesDeConvalidacionDTO> planes = GestorAdministradores.obtenerPlanes();
                 for(PlanesDeConvalidacionDTO plan : planes)
                 {
+                    //Mostrar atributos del plan
                     System.out.println(plan.toString());
+
+                    //Mostrar las asignaturas asociadas
+                    ArrayList<Plan_AsignaturasDTO> linksAsignaturas = GestorAdministradores.buscarAsignaturasDePlan(plan.getId());
+
+                    if(linksAsignaturas.size() <= 0)
+                    {
+                        System.out.println("Este plan no tiene asignaturas asociadas.");
+
+                    }
+                    else
+                    {
+                        ArrayList<AsignaturaDTO> asignaturas = new ArrayList<>();
+                        for(Plan_AsignaturasDTO link : linksAsignaturas)
+                        {
+                            AsignaturaDTO asignatura = GestorAdministradores.buscarAsignatura2(link.getIdAsignatura());
+
+                            if(asignatura != null)
+                            {
+                                asignaturas.add(asignatura);
+                            }
+                            else
+                            {
+                                System.out.println("Error al encontrar la asignatura.");
+                            }
+                        }
+                        for(AsignaturaDTO asignatura : asignaturas)
+                        {
+                            System.out.println(asignatura.toString());
+                        }
+
+                    }
+                    System.out.println("----------------------------------------------------->");
                 }
-
-                //Falta la logica
-
 
                 break;
                 case 4:

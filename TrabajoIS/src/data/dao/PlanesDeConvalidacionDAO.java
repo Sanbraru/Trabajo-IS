@@ -6,12 +6,13 @@ import data.common.sql.SqlProperties;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList; 
 
 
 public class PlanesDeConvalidacionDAO {
+
+    //Funcion que inserta un plan de convalidacion en la base de datos
 
     public static boolean insertarPlanDAO(PlanesDeConvalidacionDTO n)
     {
@@ -62,72 +63,7 @@ public class PlanesDeConvalidacionDAO {
 
     }
 
-    public static boolean insertAsignaturaPlanOrigen(AsignaturaDTO n)
-    {
-        Boolean insertado = false;
-
-        try 
-        {
-
-            DBConnection dbConnection = new DBConnection();
-            Connection connection = dbConnection.getConnection();
-            String cola = SqlProperties.getClave("sqlPlanesCONV.properties", "asignPlanOrigen");
-            
-            PreparedStatement pstmt = connection.prepareStatement(cola);
-
-
-            pstmt.setInt(1, n.getID());
-
-            //Con esto compruebas que se ha insertado el nuevo material
-            int rowsAffected = pstmt.executeUpdate();
-            insertado = rowsAffected > 0 && rowsAffected <= 1;
-
-            pstmt.close(); // Cierra el PreparedStatement
-            dbConnection.closeConnection(); // Cierra la conexión
-    
-        }
-        catch (Exception e) 
-        {
-            System.err.println(e);
-			e.printStackTrace();
-        }
-
-
-        return insertado;
-    }
-    public static boolean insertAsignaturaPlanDestino(AsignaturaDTO n)
-    {
-        Boolean insertado = false;
-
-        try 
-        {
-
-            DBConnection dbConnection = new DBConnection();
-            Connection connection = dbConnection.getConnection();
-            String cola = SqlProperties.getClave("sqlPlanesCONV.properties", "asignPlanDestino");
-            
-            PreparedStatement pstmt = connection.prepareStatement(cola);
-
-
-            pstmt.setInt(1, n.getID());
-
-            //Con esto compruebas que se ha insertado el nuevo material
-            int rowsAffected = pstmt.executeUpdate();
-            insertado = rowsAffected > 0 && rowsAffected <= 1;
-
-            pstmt.close(); // Cierra el PreparedStatement
-            dbConnection.closeConnection(); // Cierra la conexión
-    
-        }
-        catch (Exception e) 
-        {
-            System.err.println(e);
-			e.printStackTrace();
-        }
-
-
-        return insertado;
-    }
+    //Funcion que devuelve un array con todos los planes existentes
 
     public static ArrayList<PlanesDeConvalidacionDTO> requestPlanes()
     {
@@ -146,7 +82,7 @@ public class PlanesDeConvalidacionDAO {
 
             while(rs.next())
             {
-                int idPlan = rs.getInt("ID");
+                int idPlan = rs.getInt("idPlan");
                 Boolean tipoUsuario = rs.getBoolean("tipoUsuario");
                 int tiempoPlan = rs.getInt("TiempoPlan");
                 String centroDestino = rs.getString("CentroDestino");
@@ -171,6 +107,8 @@ public class PlanesDeConvalidacionDAO {
 
         return listaPlanes;
     }
+
+    //Funcion que devuelve modifica el valor del campo vigente a false
 
     public static Boolean setVigente(int ID)
     {
@@ -207,6 +145,8 @@ public class PlanesDeConvalidacionDAO {
         return insertado;
 
     }
+
+    //Funcion que busca un Plan de convalidacion por su ID
 
     public static Boolean buscarPorID(int id)
     {
